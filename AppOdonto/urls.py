@@ -9,7 +9,25 @@ urlpatterns = [
     path("registro/", registro, name="Sign Up"),
     path("login/", iniciar_sesion, name="Sign In"),
     path("logout/", LogoutView.as_view(template_name="AppOdonto/autenticacion/logout.html"),name="Logout"),
-         
 
+    path("contacto/", contacto, name="Contacto"),
+    
+    path("profesionales/nuevo", ProfesionalCrear.as_view(), name="Crear Profesional"),
+    path("profesionales/ver", ProfesionalVer.as_view(), name="Ver Profesional"),
+    path("profesionales/modificar", ProfesionalModificar.as_view(), name="Modificar Profesional"),
+    path("profesionales/eliminar", ProfesionalEliminar.as_view(), name="Eliminar Profesional"),
+    
+    path("pacientes/nuevo", PacienteCrear.as_view(), name="Crear Paciente"),
+    path("pacientes/ver", PacienteVer.as_view(), name="Ver Paciente"),
+    path("pacientes/modificar/<int:pk>", PacienteModificar.as_view(), name="Modificar Paciente"),
+    path("pacientes/eliminar/<int:pk>", PacienteEliminar.as_view(), name="Eliminar Paciente"),
+    
+    path("turnos/nuevo", TurnoCrear.as_view(), name="Crear Turno"),
+    path("turnos/ver", TurnoVer.as_view(), name="Ver Turno"),
+    path("turnos/modificar/<int:pk>", TurnoModificar.as_view(), name="Modificar Turno"),
+    path("turnos/eliminar/<int:pk>", TurnoEliminar.as_view(), name="Eliminar Turno"),    
+    
+    
+    
     
 ]

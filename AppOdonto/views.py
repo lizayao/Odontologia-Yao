@@ -47,6 +47,10 @@ def iniciar_sesion(request):
     return render(request, "AppOdonto/autenticacion/login.html", {"formulario1":miFormulario})   
 
 
+def contacto(request):
+    return render(request, "AppOdonto/contacto.html")
+
+
 # CRUD PROFESIONAL (solo staff)
 
 class ProfesionalCrear(LoginRequiredMixin, CreateView):
@@ -102,7 +106,7 @@ class TurnoModificar(LoginRequiredMixin, UpdateView):
     fields = ["servicio", "profesional", "fecha", "horario"]
     success_url = "/AppOdonto/inicio.html"    
 
-class TurnoCancelar(LoginRequiredMixin, DeleteView):
+class TurnoEliminar(LoginRequiredMixin, DeleteView):
     model = Turno
     success_url = "/AppOdonto/inicio.html"
     
