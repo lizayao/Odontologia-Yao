@@ -46,9 +46,22 @@ def iniciar_sesion(request):
         miFormulario = AuthenticationForm()
     return render(request, "AppOdonto/autenticacion/login.html", {"formulario1":miFormulario})   
 
+""" def ver_profesionales(request): """
+    
 
-def contacto(request):
-    return render(request, "AppOdonto/contacto.html")
+
+
+def pacienteFormulario(request):
+    if request.method == "POST":
+        miFormulario = PacienteFormulario(request.POST)
+        if miFormulario.is_valid:
+            informacion = miFormulario.cleaned_data
+            paciente = Paciente(nombre=informacion["nombre"], apellido=informacion["apellido"])
+            paciente.save()
+            return render(request, "AppOdonto/inicio.html")
+    else:
+        miFormulario = PacienteFormulario()
+    return render(request, "AppOdonto/contacto.html", {"miFormulario":miFormulario}),
 
 
 # CRUD PROFESIONAL (solo staff)

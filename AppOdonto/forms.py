@@ -2,30 +2,32 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-class Profesional(forms.Form):
-    nombre = forms.CharField(max_length=15)
-    apellido = forms.CharField(max_length=15)
-    especialidad = forms.CharField(max_length=15)
-    celular = forms.CharField(max_length=10)
-    email = forms.EmailField()
+""" class Profesional(forms.Form):
+    nombre = forms.CharField()
+    apellido = forms.CharField()
+    especialidad = forms.CharField()
+    celular = forms.CharField()
+    email = forms.EmailField() """
     
-class Paciente(forms.Form):
-    nombre = forms.CharField(max_length=15)
-    apellido = forms.CharField(max_length=15)
+class PacienteFormulario(forms.Form):
+    nombre = forms.CharField()
+    apellido = forms.CharField()
     edad = forms.IntegerField()
-    celular = forms.CharField(max_length=10)  
+    celular = forms.CharField()  
     email = forms.EmailField()
     
-class Servicio(forms.Form):
-    especialidad = forms.CharField(max_length=15)    
-    nombre = forms.CharField(max_length=20)
-    descripcion = forms.CharField(max_length=40)
-    precio = forms.IntegerField()
+""" class Servicio(forms.Form):
+    especialidad = forms.CharField()    
+    nombre = forms.CharField()
+    descripcion = forms.CharField()
+    precio = forms.IntegerField() """
     
-class Turno(forms.Form):
+class TurnoFormulario(forms.Form):
     fecha = forms.DateField()
     horario = forms.TimeField()
     confirmacion = forms.BooleanField()
+
+
     
 class RegistroFormulario(UserCreationForm):
     first_name = forms.CharField(label="Nombre") 

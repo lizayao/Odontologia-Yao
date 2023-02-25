@@ -21,10 +21,19 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Profesionales</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Servicios</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'Contacto' %}">Contacto</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'Inicio' %}">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="">Profesionales</a></li>
+                        <li class="nav-item"><a class="nav-link" href="">Servicios</a></li>
+                        <li class="nav-item"><a class="nav-link" href="">Contacto</a></li>
+                        {% if request.user.is_authenticated %} 
+                            {{user}}
+                            {% with request.user.avatarimagen_set.first as avatar1 %}
+                                {% if avatar1 %} 
+                                    <img src="{{avatar1.imagen.url}}" alt="Imagen perfil" width="50px">
+                                {% endif %}
+                            {% endwith %}
+                            <a class="btn btn-outline-light btn-lg px-4" href="{% url 'Logout' %}">Cerrar sesión</a>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
@@ -38,8 +47,13 @@
                             <h1 class="display-5 fw-bolder text-white mb-2">Tu sonrisa es nuestra meta</h1>
                             <p class="lead text-white-50 mb-4">Nuestro consultorio está equipado con la última tecnología para brindarles lo mejor en el área! <br> Registrate o iniciá sesión para pedir tus turnos.</p>
                             <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
-                                <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">Registrarse</a>
-                                <a class="btn btn-outline-light btn-lg px-4" href="#!">Iniciar sesión</a>
+
+                                                    
+
+                                <a class="btn btn-primary btn-lg px-4 me-sm-3" href="{% url 'Registro' %}">Registrarse</a>
+                                <a class="btn btn-outline-light btn-lg px-4" href="{% url 'Login' %}">Iniciar sesión</a>
+
+                           
                             </div>
                         </div>
                     </div>
@@ -122,9 +136,6 @@
         {% block acercademi %}
 
         {% endblock %}
-
-
-
 
         <!-- Footer-->
         <footer class="py-5 bg-dark">

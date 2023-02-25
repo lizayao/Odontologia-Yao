@@ -3,14 +3,19 @@ from AppOdonto.views import *
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
-    path("inicio/",inicio, name="Start"),    
+    path("inicio/",inicio, name="Inicio"),    
     
     #Autenticacion de usuario
-    path("registro/", registro, name="Sign Up"),
-    path("login/", iniciar_sesion, name="Sign In"),
+    path("registro/", registro, name="Registro"),
+    path("login/", iniciar_sesion, name="Login"),
     path("logout/", LogoutView.as_view(template_name="AppOdonto/autenticacion/logout.html"),name="Logout"),
 
-    path("contacto/", contacto, name="Contacto"),
+   
+
+
+
+
+
     
     path("profesionales/nuevo", ProfesionalCrear.as_view(), name="Crear Profesional"),
     path("profesionales/ver", ProfesionalVer.as_view(), name="Ver Profesional"),

@@ -7,3 +7,6 @@ Tanto los profesionales como los pacientes pueden registrarse o iniciar sesion.
 Los pacientes pueden crear, ver, modificar y eliminar los turnos.
 
 
+Superadmin
+Usuario: yao12
+Contraseña: odontologia12
