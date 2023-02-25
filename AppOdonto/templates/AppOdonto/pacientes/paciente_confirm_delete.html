@@ -1,0 +1,14 @@
+{% extends "AppOdonto/padre.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block header %}
+    Eliminar paciente
+{% endblock %}
+
+{% block form %} 
+    <form action="" method="POST"> {% csrf_token %}
+        ¿Está seguro de eliminar al paiente {{object.nombre}}?
+        <input type="submit" value="Sí">
+    </form>
+{% endblock %}

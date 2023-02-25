@@ -1,0 +1,13 @@
+{% extends "AppOdonto/padre.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block header %}
+    registrar
+{% endblock %}
+
+{% block form %} 
+    <form action="" method="POST"> {% csrf_token %}
+        {{form crispy}}
+        <input type="submit" value="Enviar" class="btn btn-success">
+    </form>
