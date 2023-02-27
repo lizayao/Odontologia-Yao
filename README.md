@@ -1,11 +1,11 @@
 Proyecto final Python
+Liza Yao
 
 Descripción
-Esta página se trata de un consultorio odontológico el cual brinda servicios a pacientes.
-Tanto los profesionales como los pacientes pueden registrarse o iniciar sesion.
+En esta página los dentistas pertenecientes al consultorio podrán acceder y crear, ver, modificar o eliminar otros profesionales, pacientes, servicios brindados y turnos.
 
-Los pacientes pueden crear, ver, modificar y eliminar los turnos.
-
+Video explicativo (no mas de 10 minutos)
+*insertar URL*
 
 Superadmin
 Usuario: yao12

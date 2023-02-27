@@ -23,6 +23,7 @@ class PacienteFormulario(forms.Form):
     precio = forms.IntegerField() """
     
 class TurnoFormulario(forms.Form):
+    paciente = forms.CharField()
     fecha = forms.DateField()
     horario = forms.TimeField()
     confirmacion = forms.BooleanField()

@@ -1,0 +1,28 @@
+{% extends "AppOdonto/padre.html" %}
+
+<!-- {% if miFormulario.errors %} 
+    <p style="color:red">Por favor revisar los datos.</p>
+{% endif %}
+
+<form action="" method="POST"> {% csrf_token %}
+    <table>
+        {{miFormulario.as_table}}
+    </table>
+    <input type="submit", value="Enviar">
+</form> -->
+
+{% block header %}
+    <h1 class="display-5 fw-bolder text-white mb-2">Sobre mí</h1>
+{% endblock %}
+
+
+{% block features %}
+{% endblock %}
+
+
+
+{% block acercademi %}
+    Acerca de mí
+    <img>
+    <p>Hola, mi nombre es Liza y soy Licenciada en Administración. Me interesa encaminarme por el mundo de la programación y desarrollarme en esa área.</p>
+{% endblock %}

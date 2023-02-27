@@ -3,27 +3,27 @@ from django.http import HttpResponse
 from AppOdonto.models import *
 from AppOdonto.forms import *
 from django.views.generic import ListView
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
 def inicio(request):
     return render(request, "AppOdonto/inicio.html")
 
-
 def registro(request):
     if request.method == "POST":
         miFormulario = RegistroFormulario(request.POST)
         if miFormulario.is_valid():
             miFormulario.save()
-            return render(request, "AppOdonto/inicio.html")
+            return render(request, "AppOdonto/inicio.html", {'mensaje':"Usuario registrado"})
     else:
         miFormulario = RegistroFormulario()
     return render(request, "AppOdonto/autenticacion/registro.html", {"formulario1":miFormulario})
-
 
 def iniciar_sesion(request): 
     if request.method == "POST":
@@ -46,22 +46,22 @@ def iniciar_sesion(request):
         miFormulario = AuthenticationForm()
     return render(request, "AppOdonto/autenticacion/login.html", {"formulario1":miFormulario})   
 
-""" def ver_profesionales(request): """
     
+def about(request):
+    return render(request, "AppOdonto/about.html")
 
-
-
+@login_required
 def pacienteFormulario(request):
     if request.method == "POST":
         miFormulario = PacienteFormulario(request.POST)
-        if miFormulario.is_valid:
+        if miFormulario.is_valid():
             informacion = miFormulario.cleaned_data
-            paciente = Paciente(nombre=informacion["nombre"], apellido=informacion["apellido"])
+            paciente = Paciente(nombre=informacion["nombre"], apellido=informacion["apellido"], edad=informacion["edad"], celular=informacion["celular"], email=informacion["email"])
             paciente.save()
             return render(request, "AppOdonto/inicio.html")
     else:
         miFormulario = PacienteFormulario()
-    return render(request, "AppOdonto/contacto.html", {"miFormulario":miFormulario}),
+    return render(request, "AppOdonto/paciente_form.html", {"miFormulario":miFormulario}),
 
 
 # CRUD PROFESIONAL (solo staff)
@@ -89,7 +89,7 @@ class ProfesionalEliminar(LoginRequiredMixin, DeleteView):
 class PacienteCrear(LoginRequiredMixin, CreateView):
     model = Paciente
     fields = ["nombre", "apellido", "edad", "celular", "email"]
-    success_url = "/AppOdonto/inicio.html"
+    success_url = "/AppOdonto/pacientes/paciente/list"
     
 class PacienteVer(ListView):
     model = Paciente 

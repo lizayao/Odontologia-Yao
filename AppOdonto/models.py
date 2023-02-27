@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Profesional(models.Model):
+    def __str__(self):
+        return f"Doctor {self.nombre} {self.apellido} - Especialidad: {self.especialidad}"
     nombre = models.CharField(max_length=15)
     apellido = models.CharField(max_length=15)
     especialidad = models.CharField(max_length=15)
@@ -11,6 +13,8 @@ class Profesional(models.Model):
     email = models.EmailField()
     
 class Paciente(models.Model):
+    def __str__(self):
+        return f"Paciente {self.nombre} {self.apellido}"
     nombre = models.CharField(max_length=15)
     apellido = models.CharField(max_length=15)
     edad = models.IntegerField()
@@ -18,15 +22,20 @@ class Paciente(models.Model):
     email = models.EmailField()
     
 class Servicio(models.Model):
-    especialidad = models.CharField(max_length=15)    
+    def __str__(self):
+        return f"{self.nombre} ({self.especialidad}) - Precio: ${self.precio}"
     nombre = models.CharField(max_length=20)
+    especialidad = models.CharField(max_length=15)
     descripcion = models.CharField(max_length=40)
     precio = models.IntegerField()
     
 class Turno(models.Model):
+    def __str__(self):
+        return f"Paciente: {self.paciente} - Servicio: {self.servicio} - Fecha: {self.fecha} - Horario: {self.horario}"
+    paciente = models.CharField(max_length=15) 
+    servicio = models.CharField(max_length=15) 
     fecha = models.DateField()
     horario = models.TimeField()
-    confirmacion = models.BooleanField()
     
 class AvatarImagen(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)

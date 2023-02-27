@@ -1,6 +1,17 @@
 {% extends "AppOdonto/padre.html" %}
 
 {% block header %}
-    Ingrese su usuario y contraseña
+    <h1 class="display-5 fw-bolder text-white mb-2">Inicio de sesión</h1>
 {% endblock %}
+
+
+{% block formulario %}
+    <form action="" method="POST"> {% csrf_token %}
+        <table>
+            {{formulario1.as_table}}
+        </table>
+        <input type = "submit" value = "Iniciar sesión"> 
+    </form>
+{% endblock %}
+
 
