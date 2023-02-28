@@ -65,14 +65,25 @@ def editarProfesional(request, profesional_nombre):
 
 # CRUD SERVICIOS (vistas basadas en clases)
 
+class ServicioList(ListView):
+    model = Servicio
 
+class ServicioDetail(DetailView):
+    model = Servicio
 
+class ServicioCreate(CreateView):
+    model = Servicio
+    success_url = "/AppOdonto/servicio/list"
+    fields = ['nombre', 'especialidad', 'descripcion', 'precio']
+    
+class ServicioUpdate(UpdateView):
+    model = Servicio
+    success_url = "/AppOdonto/servicio/list"
+    fields = ['nombre', 'especialidad', 'descripcion', 'precio']
 
-
-
-
-
-
+class ServicioDelete(DeleteView):
+    model = Servicio
+    success_url = "/AppOdonto/servicio/list"
 
 
 

@@ -6,12 +6,26 @@ from django.contrib.auth.views import LogoutView
 urlpatterns = [
     path("", views.inicio, name="Inicio"),    
     
-    #CRUD PROFESIONALES
+    # CRUD PROFESIONALES
     path('verProfesionales/', views.verProfesionales, name="Ver Profesionales"),
     path('agregarProfesional/', views.agregarProfesional, name="Agregar Profesional"),
     path('borrarProfesional/<profesional_nombre>/', views.borrarProfesional, name="Borrar Profesional"),
     path('editarProfesional/<profesional_nombre>/', views.editarProfesional, name="Editar Profesional"),
     
+    # CRUD SERVICIOS (con clases)
+    path('servicio/list/', ServicioList.as_view(), name="Servicio List"),
+    path('servicio/<int:pk>', ServicioDetail.as_view(), name="Servicio Detail"),
+    path('servicio/crear/<int:pk>', views.ServicioCreate.as_view(), name="Servicio Create"),
+    #path('servicio/edit/<int:pk>', views.ServicioUpdate.as_view(), name="Servicio Edit"),
+    #path('servicio/delete/<int:pk>', views.ServicioDelete.as_view(), name="Servicio Delete"),
+    
+    
+    
+    
+    
+    
+    
+
     #Autenticacion de usuario
     path("registro/", registro, name="Registro"),
     path("login/", iniciar_sesion, name="Login"),
