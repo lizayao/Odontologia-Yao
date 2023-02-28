@@ -6,9 +6,9 @@
     Eliminar paciente
 {% endblock %}
 
-{% block form %} 
+{% block formulario %} 
     <form action="" method="POST"> {% csrf_token %}
-        ¿Está seguro de eliminar al paiente {{object.nombre}}?
+        ¿Está seguro de que quiere eliminar al paciente {{object.nombre}} {{object.apellido}}?
         <input type="submit" value="Sí">
     </form>
 {% endblock %}

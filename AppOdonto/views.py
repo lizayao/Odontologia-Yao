@@ -31,10 +31,7 @@ def iniciar_sesion(request):
         if miFormulario.is_valid():
             usuario = miFormulario.cleaned_data.get("username") 
             contra = miFormulario.cleaned_data.get("password")
-            print(usuario)
-            print(contra)
             miUsuario = authenticate(username=usuario, password=contra) 
-            print(miUsuario)
             if miUsuario:
                 login(request,miUsuario)          
                 mensaje = f"Bienvenido {miUsuario}"
@@ -45,13 +42,15 @@ def iniciar_sesion(request):
     else:
         miFormulario = AuthenticationForm()
     return render(request, "AppOdonto/autenticacion/login.html", {"formulario1":miFormulario})   
-
-    
+  
 def about(request):
     return render(request, "AppOdonto/about.html")
 
+
+# Formulario HTML
+
 @login_required
-def pacienteFormulario(request):
+def profesionalFormulario(request):
     if request.method == "POST":
         miFormulario = PacienteFormulario(request.POST)
         if miFormulario.is_valid():
@@ -61,7 +60,7 @@ def pacienteFormulario(request):
             return render(request, "AppOdonto/inicio.html")
     else:
         miFormulario = PacienteFormulario()
-    return render(request, "AppOdonto/paciente_form.html", {"miFormulario":miFormulario}),
+    return render(request, "AppOdonto/profesionales/profesionalFormulario.html", {"miFormulario":miFormulario}),
 
 
 # CRUD PROFESIONAL (solo staff)
@@ -84,24 +83,29 @@ class ProfesionalEliminar(LoginRequiredMixin, DeleteView):
     success_url = "/AppOdonto/inicio.html"
 
 
-# CRUD PACIENTE
-
+# CRUD PACIENTE 
+    
+class PacienteLista(ListView):
+    model = Paciente 
+    template_name = "AppOdonto/pacientes/paciente_list.html"
+    
+class PacienteDetalle(DetailView):
+    model = Paciente
+    template_name = "AppOdonto/pacientes/paciente_detail.html"
+    
 class PacienteCrear(LoginRequiredMixin, CreateView):
     model = Paciente
     fields = ["nombre", "apellido", "edad", "celular", "email"]
     success_url = "/AppOdonto/pacientes/paciente/list"
     
-class PacienteVer(ListView):
-    model = Paciente 
-    
 class PacienteModificar(LoginRequiredMixin, UpdateView):
     model = Paciente
     fields = ["nombre", "apellido", "edad", "celular", "email"]
-    success_url = "/AppOdonto/inicio.html"
+    success_url = "/AppOdonto/pacientes/paciente/list"
     
 class PacienteEliminar(LoginRequiredMixin, DeleteView):
     model = Paciente
-    success_url = "/AppOdonto/inicio.html"
+    success_url = "/AppOdonto/pacientes/paciente/list"
 
 
 # CRUD TURNO
@@ -121,7 +125,7 @@ class TurnoModificar(LoginRequiredMixin, UpdateView):
 
 class TurnoEliminar(LoginRequiredMixin, DeleteView):
     model = Turno
-    success_url = "/AppOdonto/inicio.html"
+    success_url = "/AppOdonto/inicio.html" 
     
 
 

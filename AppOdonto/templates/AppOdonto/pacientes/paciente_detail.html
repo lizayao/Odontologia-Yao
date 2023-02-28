@@ -1,0 +1,15 @@
+{% extends "AppOdonto/padre.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block header %}
+    Detalle de paciente
+{% endblock %}
+
+    <p> Nombre: {{paciente.nombre}} <br>
+        Apellido: {{paciente.apellido}} <br>
+        Edad: {{paciente.edad}} <br>
+        Celular: {{paciente.celular}} <br>
+        Email: {{paciente.email}}
+    </p>
+    <a href="{% url 'Lista Paciente' %}">Volver</a>
