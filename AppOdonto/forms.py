@@ -2,12 +2,18 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-""" class Profesional(forms.Form):
+class ProfesionalFormulario(forms.Form):
     nombre = forms.CharField()
     apellido = forms.CharField()
     especialidad = forms.CharField()
     celular = forms.CharField()
-    email = forms.EmailField() """
+    email = forms.EmailField()
+    
+class ServicioFormulario(forms.Form):
+    nombre = forms.CharField()
+    especialidad = forms.CharField()    
+    descripcion = forms.CharField()
+    precio = forms.IntegerField()
     
 class PacienteFormulario(forms.Form):
     nombre = forms.CharField()
@@ -16,20 +22,16 @@ class PacienteFormulario(forms.Form):
     celular = forms.CharField()  
     email = forms.EmailField()
     
-""" class Servicio(forms.Form):
-    especialidad = forms.CharField()    
-    nombre = forms.CharField()
-    descripcion = forms.CharField()
-    precio = forms.IntegerField() """
-    
 class TurnoFormulario(forms.Form):
     paciente = forms.CharField()
+    servicio = forms.CharField()
+    profesional = forms.CharField()
     fecha = forms.DateField()
     horario = forms.TimeField()
     confirmacion = forms.BooleanField()
 
 
-    
+
 class RegistroFormulario(UserCreationForm):
     first_name = forms.CharField(label="Nombre") 
     last_name = forms.CharField(label="Apellido", initial="Pepe")

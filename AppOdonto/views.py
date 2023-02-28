@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from AppOdonto.models import *
 from AppOdonto.forms import *
 from django.views.generic import ListView
@@ -55,7 +54,7 @@ def profesionalFormulario(request):
         miFormulario = PacienteFormulario(request.POST)
         if miFormulario.is_valid():
             informacion = miFormulario.cleaned_data
-            paciente = Paciente(nombre=informacion["nombre"], apellido=informacion["apellido"], edad=informacion["edad"], celular=informacion["celular"], email=informacion["email"])
+            paciente = PacienteModel(nombre=informacion["nombre"], apellido=informacion["apellido"], edad=informacion["edad"], celular=informacion["celular"], email=informacion["email"])
             paciente.save()
             return render(request, "AppOdonto/inicio.html")
     else:
@@ -63,9 +62,9 @@ def profesionalFormulario(request):
     return render(request, "AppOdonto/profesionales/profesionalFormulario.html", {"miFormulario":miFormulario}),
 
 
-# CRUD PROFESIONAL (solo staff)
+# CRUD PROFESIONAL
 
-class ProfesionalCrear(LoginRequiredMixin, CreateView):
+""" class ProfesionalCrear(LoginRequiredMixin, CreateView):
     model = Profesional
     fields = ["nombre", "apellido", "especialidad", "celular", "email"]
     success_url = "/AppOdonto/inicio.html"
@@ -80,12 +79,12 @@ class ProfesionalModificar(LoginRequiredMixin, UpdateView):
     
 class ProfesionalEliminar(LoginRequiredMixin, DeleteView):
     model = Profesional
-    success_url = "/AppOdonto/inicio.html"
+    success_url = "/AppOdonto/inicio.html" """
 
 
 # CRUD PACIENTE 
     
-class PacienteLista(ListView):
+""" class PacienteLista(ListView):
     model = Paciente 
     template_name = "AppOdonto/pacientes/paciente_list.html"
     
@@ -105,12 +104,12 @@ class PacienteModificar(LoginRequiredMixin, UpdateView):
     
 class PacienteEliminar(LoginRequiredMixin, DeleteView):
     model = Paciente
-    success_url = "/AppOdonto/pacientes/paciente/list"
+    success_url = "/AppOdonto/pacientes/paciente/list" """
 
 
 # CRUD TURNO
 
-class TurnoCrear(LoginRequiredMixin, CreateView):
+""" class TurnoCrear(LoginRequiredMixin, CreateView):
     model = Turno
     fields = ["servicio", "profesional", "fecha", "horario"]
     success_url = "/AppOdonto/inicio.html"   
@@ -125,7 +124,7 @@ class TurnoModificar(LoginRequiredMixin, UpdateView):
 
 class TurnoEliminar(LoginRequiredMixin, DeleteView):
     model = Turno
-    success_url = "/AppOdonto/inicio.html" 
+    success_url = "/AppOdonto/inicio.html"  """
     
 
 

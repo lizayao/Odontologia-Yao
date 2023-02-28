@@ -14,7 +14,7 @@
 
     {% for paciente in object_list %}
         <p>Nombre: {{paciente.nombre}}      
-            <a href="{% url 'Detalle Paciente' paciente.id %}">Ver paciente</a>
+            <a href="{% url 'Detalle Paciente' paciente.id %}">Detalle paciente</a>
             <a href="{% url 'Modificar Paciente' paciente.id %}">Editar paciente</a>    
             <a href="{% url 'Eliminar Paciente' paciente.id %}">Eliminar paciente</a>
         </p>  
