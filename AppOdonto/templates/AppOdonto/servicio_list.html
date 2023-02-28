@@ -16,15 +16,16 @@
                     Nombre: {{servicio.nombre}}
                 </p>
                 <p>
-                    <a href="{% url 'Servicio Detail' servicio.id %}">Ver detalle</a>
- 
+                    <a href="{% url 'Servicio Detail' servicio.id %}">Ver Servicio</a>
+                    <a href="{% url 'Servicio Edit' servicio.id %}">Editar Servicio</a>
                 </p>
             </li>
         {% endfor %}
     </ul>
     <br>
-
-
+    <button>
+        <a href="{% url 'Servicio Create' %}">Crear Servicio</a>
+    </button>
 
 </body>
 </html>

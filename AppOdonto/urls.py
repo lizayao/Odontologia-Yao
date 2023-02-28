@@ -15,8 +15,8 @@ urlpatterns = [
     # CRUD SERVICIOS (con clases)
     path('servicio/list/', ServicioList.as_view(), name="Servicio List"),
     path('servicio/<int:pk>', ServicioDetail.as_view(), name="Servicio Detail"),
-    path('servicio/crear/<int:pk>', views.ServicioCreate.as_view(), name="Servicio Create"),
-    #path('servicio/edit/<int:pk>', views.ServicioUpdate.as_view(), name="Servicio Edit"),
+    path('servicio/crear/', ServicioCreate.as_view(), name="Servicio Create"),
+    path('servicio/editar/<int:pk>', ServicioUpdate.as_view(), name="Servicio Edit"),
     #path('servicio/delete/<int:pk>', views.ServicioDelete.as_view(), name="Servicio Delete"),
     
     
