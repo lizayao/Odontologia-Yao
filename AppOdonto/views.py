@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from AppOdonto.models import *
 from AppOdonto.forms import *
 from django.views.generic import ListView
@@ -9,77 +10,71 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
-# Create your views here.
+
+# INICIO
 
 def inicio(request):
     return render(request, "AppOdonto/inicio.html")
 
-def registro(request):
-    if request.method == "POST":
-        miFormulario = RegistroFormulario(request.POST)
-        if miFormulario.is_valid():
-            miFormulario.save()
-            return render(request, "AppOdonto/inicio.html", {'mensaje':"Usuario registrado"})
-    else:
-        miFormulario = RegistroFormulario()
-    return render(request, "AppOdonto/autenticacion/registro.html", {"formulario1":miFormulario})
-
-def iniciar_sesion(request): 
-    if request.method == "POST":
-        miFormulario = AuthenticationForm(request, data = request.POST) 
-        if miFormulario.is_valid():
-            usuario = miFormulario.cleaned_data.get("username") 
-            contra = miFormulario.cleaned_data.get("password")
-            miUsuario = authenticate(username=usuario, password=contra) 
-            if miUsuario:
-                login(request,miUsuario)          
-                mensaje = f"Bienvenido {miUsuario}"
-                return render(request, "AppOdonto/inicio.html", {"mensaje":mensaje})
-            else:
-                mensaje = f"Datos ingresados incorrectos."
-                return render(request, "AppOdonto/inicio.html", {"mensaje":mensaje})
-    else:
-        miFormulario = AuthenticationForm()
-    return render(request, "AppOdonto/autenticacion/login.html", {"formulario1":miFormulario})   
-  
-def about(request):
-    return render(request, "AppOdonto/about.html")
-
-
-# Formulario HTML
-
-@login_required
-def profesionalFormulario(request):
-    if request.method == "POST":
-        miFormulario = PacienteFormulario(request.POST)
-        if miFormulario.is_valid():
-            informacion = miFormulario.cleaned_data
-            paciente = PacienteModel(nombre=informacion["nombre"], apellido=informacion["apellido"], edad=informacion["edad"], celular=informacion["celular"], email=informacion["email"])
-            paciente.save()
-            return render(request, "AppOdonto/inicio.html")
-    else:
-        miFormulario = PacienteFormulario()
-    return render(request, "AppOdonto/profesionales/profesionalFormulario.html", {"miFormulario":miFormulario}),
-
 
 # CRUD PROFESIONAL
 
-""" class ProfesionalCrear(LoginRequiredMixin, CreateView):
-    model = Profesional
-    fields = ["nombre", "apellido", "especialidad", "celular", "email"]
-    success_url = "/AppOdonto/inicio.html"
-    
-class ProfesionalVer(LoginRequiredMixin, ListView):
-    model = Profesional 
-    
-class ProfesionalModificar(LoginRequiredMixin, UpdateView):
-    model = Profesional
-    fields = ["nombre", "apellido", "especialidad", "celular", "email"]
-    success_url = "/AppOdonto/inicio.html"
-    
-class ProfesionalEliminar(LoginRequiredMixin, DeleteView):
-    model = Profesional
-    success_url = "/AppOdonto/inicio.html" """
+def verProfesionales(request):
+    profesionales = Profesional.objects.all()
+    contexto = {"profesionales":profesionales}
+    return render(request, "AppOdonto/Profesionales/verProfesionales.html", contexto)
+
+def agregarProfesional(request):
+    if request.method == 'POST':
+        miFormulario = ProfesionalFormulario(request.POST)
+        print(miFormulario)
+        if miFormulario.is_valid():
+            informacion = miFormulario.cleaned_data
+            profesional = Profesional(nombre=informacion['nombre'], apellido=informacion['apellido'], especialidad=informacion['especialidad'], celular=informacion['celular'], email=informacion['email'])
+            profesional.save()
+            return render(request, "AppOdonto/inicio.html")
+    else:
+        miFormulario = ProfesionalFormulario()
+    return render(request, "AppOdonto/Profesionales/agregarProfesional.html", {"miFormulario":miFormulario})
+
+def borrarProfesional(request, profesional_nombre):
+    profesional = Profesional.objects.get(nombre=profesional_nombre)
+    profesional.delete()
+    profesional = Profesional.objects.all()
+    contexto = {"profesional": profesional}
+    return render(request, "AppOdonto/Profesionales/verProfesionales.html", contexto)
+
+def editarProfesional(request, profesional_nombre):
+    profesional = Profesional.objects.get(nombre=profesional_nombre)
+    if request.method == "POST":
+        miFormulario = ProfesionalFormulario(request.POST)
+        print(miFormulario)
+        if miFormulario.is_valid():
+            informacion = miFormulario.cleaned_data
+            profesional.nombre = informacion['nombre']
+            profesional.apellido = informacion['apellido']
+            profesional.especialidad = informacion['especialidad']
+            profesional.celular = informacion['celular']
+            profesional.email = informacion['email']
+            profesional.save()
+            return render(request, "AppOdonto/inicio.html")
+    else:
+        miFormulario = ProfesionalFormulario(initial={'nombre':profesional.nombre, 'apellido': profesional.apellido, 'especialidad': profesional.especialidad, 'celular': profesional.celular, 'email': profesional.email})
+    return render(request, "AppOdonto/Profesionales/editarProfesional.html", {"miFormulario":miFormulario, "profesional_nombre":profesional_nombre})
+
+
+# CRUD SERVICIOS (vistas basadas en clases)
+
+
+
+
+
+
+
+
+
+
+
 
 
 # CRUD PACIENTE 
@@ -127,4 +122,36 @@ class TurnoEliminar(LoginRequiredMixin, DeleteView):
     success_url = "/AppOdonto/inicio.html"  """
     
 
+# REGISTRO - LOGIN - LOGOUT
 
+
+def registro(request):
+    if request.method == "POST":
+        miFormulario = RegistroFormulario(request.POST)
+        if miFormulario.is_valid():
+            miFormulario.save()
+            return render(request, "AppOdonto/inicio.html", {'mensaje':"Usuario registrado"})
+    else:
+        miFormulario = RegistroFormulario()
+    return render(request, "AppOdonto/autenticacion/registro.html", {"formulario1":miFormulario})
+
+def iniciar_sesion(request): 
+    if request.method == "POST":
+        miFormulario = AuthenticationForm(request, data = request.POST) 
+        if miFormulario.is_valid():
+            usuario = miFormulario.cleaned_data.get("username") 
+            contra = miFormulario.cleaned_data.get("password")
+            miUsuario = authenticate(username=usuario, password=contra) 
+            if miUsuario:
+                login(request,miUsuario)          
+                mensaje = f"Bienvenido {miUsuario}"
+                return render(request, "AppOdonto/inicio.html", {"mensaje":mensaje})
+            else:
+                mensaje = f"Datos ingresados incorrectos."
+                return render(request, "AppOdonto/inicio.html", {"mensaje":mensaje})
+    else:
+        miFormulario = AuthenticationForm()
+    return render(request, "AppOdonto/autenticacion/login.html", {"formulario1":miFormulario})   
+  
+def about(request):
+    return render(request, "AppOdonto/about.html")

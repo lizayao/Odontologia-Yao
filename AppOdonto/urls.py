@@ -4,7 +4,13 @@ from AppOdonto.views import *
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
-    path("inicio/",inicio, name="Inicio"),    
+    path("", views.inicio, name="Inicio"),    
+    
+    #CRUD PROFESIONALES
+    path('verProfesionales/', views.verProfesionales, name="Ver Profesionales"),
+    path('agregarProfesional/', views.agregarProfesional, name="Agregar Profesional"),
+    path('borrarProfesional/<profesional_nombre>/', views.borrarProfesional, name="Borrar Profesional"),
+    path('editarProfesional/<profesional_nombre>/', views.editarProfesional, name="Editar Profesional"),
     
     #Autenticacion de usuario
     path("registro/", registro, name="Registro"),
@@ -13,16 +19,10 @@ urlpatterns = [
     path("about/", about, name="About"),  
        
        
-    path('profesionalFormulario', profesionalFormulario, name="ProfesionalFormulario"),
-       
-
     
 ]
 
-
-       
-       
-       
+      
     #path("profesionales/nuevo", ProfesionalCrear.as_view(), name="Crear Profesional"),
     #path("profesionales/ver", ProfesionalVer.as_view(), name="Ver Profesional"),
     #path("profesionales/modificar/<int:pk>", ProfesionalModificar.as_view(), name="Modificar Profesional"),

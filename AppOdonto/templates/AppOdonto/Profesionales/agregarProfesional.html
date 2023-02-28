@@ -1,0 +1,15 @@
+{% extends "AppOdonto/padre.html" %}
+
+
+{% if miFormulario.errors %}
+    <p style="color:red">Están mal los datos, revisar.</p>
+{% endif %}
+
+{% block formulario %}
+    <form action="" method="POST"> {% csrf_token %}
+        <table>
+            {{miFormulario.as_table}}
+        </table>
+        <input type="submit", value="Agregar">
+    </form>
+{% endblock %}

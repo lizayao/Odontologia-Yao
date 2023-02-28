@@ -22,9 +22,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'Inicio' %}">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="">Servicios</a></li>                       
-                        <li class="nav-item"><a class="nav-link" href="">Pacientes</a></li>
-                        <li class="nav-item"><a class="nav-link" href="">Turnos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'Ver Profesionales' %}">Profesionales</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Servicios</a></li>                       
+                        <li class="nav-item"><a class="nav-link" href="#">Pacientes</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Turnos</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'About' %}">Acerca de mí</a></li>
 
                         
@@ -69,7 +70,8 @@
 
         {% endblock %}
 
-{% block body %}
+
+
         {% block features %}
         <!-- Features section-->
         <section class="py-5 border-bottom" id="features">
@@ -95,9 +97,122 @@
         </section>
         {% endblock %}
 
-        {% block acercademi %}
 
-        {% endblock %}
+{% block body %}
+
+        <!-- Testimonials section-->
+        <section class="py-5 border-bottom">
+            <div class="container px-5 my-5 px-5">
+                <div class="text-center mb-5">
+                    <h2 class="fw-bolder">Pacientes contentos</h2>
+                    <p class="lead mb-0">Sigamos brindando el mejor servicio en el área.</p>
+                </div>
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-6">
+                        <!-- Testimonial 1-->
+                        <div class="card mb-4">
+                            <div class="card-body p-4">
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0"><i class="bi bi-chat-right-quote-fill text-primary fs-1"></i></div>
+                                    <div class="ms-4">
+                                        <p class="mb-1">Thank you for putting together such a great product. We loved working with you and the whole team, and we will be recommending you to others!</p>
+                                        <div class="small text-muted">- Client Name, Location</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Testimonial 2-->
+                        <div class="card">
+                            <div class="card-body p-4">
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0"><i class="bi bi-chat-right-quote-fill text-primary fs-1"></i></div>
+                                    <div class="ms-4">
+                                        <p class="mb-1">The whole team was a huge help with putting things together for our company and brand. We will be hiring them again in the near future for additional work!</p>
+                                        <div class="small text-muted">- Client Name, Location</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+     <!-- Contact section-->
+ <section class="bg-light py-5">
+    <div class="container px-5 my-5 px-5">
+        <div class="text-center mb-5">
+            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-envelope"></i></div>
+            <h2 class="fw-bolder">¿Querés trabajar con nosotros?</h2>
+            <p class="lead mb-0">Completá los siguientes datos y te contactamos!</p>
+        </div>
+        <div class="row gx-5 justify-content-center">
+            <div class="col-lg-6">
+                <!-- * * * * * * * * * * * * * * *-->
+                <!-- * * SB Forms Contact Form * *-->
+                <!-- * * * * * * * * * * * * * * *-->
+                <!-- This form is pre-integrated with SB Forms.-->
+                <!-- To make this form functional, sign up at-->
+                <!-- https://startbootstrap.com/solution/contact-forms-->
+                <!-- to get an API token!-->
+                <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                    <!-- Name input-->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
+                        <label for="name">Nombre y apellido</label>
+                        <div class="invalid-feedback" data-sb-feedback="name:required">Ingresá tu nombre y apellido.</div>
+                    </div>
+                    <!-- Email address input-->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
+                        <label for="email">Email</label>
+                        <div class="invalid-feedback" data-sb-feedback="email:required">Ingresá tu email.</div>
+                        <div class="invalid-feedback" data-sb-feedback="email:email">Email no válido.</div>
+                    </div>
+                    <!-- Phone number input-->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
+                        <label for="phone">Celular</label>
+                        <div class="invalid-feedback" data-sb-feedback="phone:required">Ingresá tu celular.</div>
+                    </div>
+                    <!-- Message input-->
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
+                        <label for="message">Mensaje</label>
+                        <div class="invalid-feedback" data-sb-feedback="message:required">Contanos de vos y cuál es tu especialidad.</div>
+                    </div>
+                    <!-- Submit success message-->
+                    <!---->
+                    <!-- This is what your users will see when the form-->
+                    <!-- has successfully submitted-->
+                    <div class="d-none" id="submitSuccessMessage">
+                        <div class="text-center mb-3">
+                            <div class="fw-bolder">Form submission successful!</div>
+                            To activate this form, sign up at
+                            <br />
+                            <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                        </div>
+                    </div>
+                    <!-- Submit error message-->
+                    <!---->
+                    <!-- This is what your users will see when there is-->
+                    <!-- an error submitting the form-->
+                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                    <!-- Submit Button-->
+                    <div class="d-grid"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Enviar</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>  
+
+
+{% endblock %}
+
+
+
+{% block acercademi %}
+
 {% endblock %}
 
         <!-- Footer-->
