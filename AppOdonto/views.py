@@ -6,7 +6,7 @@ from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
@@ -24,6 +24,7 @@ def verProfesionales(request):
     contexto = {"profesionales":profesionales}
     return render(request, "AppOdonto/Profesionales/verProfesionales.html", contexto)
 
+@login_required
 def agregarProfesional(request):
     if request.method == 'POST':
         miFormulario = ProfesionalFormulario(request.POST)
@@ -37,6 +38,7 @@ def agregarProfesional(request):
         miFormulario = ProfesionalFormulario()
     return render(request, "AppOdonto/Profesionales/agregarProfesional.html", {"miFormulario":miFormulario})
 
+@login_required
 def borrarProfesional(request, profesional_nombre):
     profesional = Profesional.objects.get(nombre=profesional_nombre)
     profesional.delete()
@@ -44,6 +46,7 @@ def borrarProfesional(request, profesional_nombre):
     contexto = {"profesional": profesional}
     return render(request, "AppOdonto/Profesionales/verProfesionales.html", contexto)
 
+@login_required
 def editarProfesional(request, profesional_nombre):
     profesional = Profesional.objects.get(nombre=profesional_nombre)
     if request.method == "POST":
@@ -65,104 +68,103 @@ def editarProfesional(request, profesional_nombre):
 
 # CRUD SERVICIOS (vistas basadas en clases)
 
-class ServicioList(ListView):
+class ServicioList(LoginRequiredMixin, ListView):
     model = Servicio
 
-class ServicioDetail(DetailView):
+class ServicioDetail(LoginRequiredMixin, DetailView):
     model = Servicio
 
-class ServicioCreate(CreateView):
+class ServicioCreate(LoginRequiredMixin, CreateView):
     model = Servicio
     success_url = "/AppOdonto/servicio/list"
     fields = ['nombre', 'especialidad', 'descripcion', 'precio']
     
-class ServicioUpdate(UpdateView):
+class ServicioUpdate(LoginRequiredMixin, UpdateView):
     model = Servicio
     success_url = "/AppOdonto/servicio/list"
     fields = ['nombre', 'especialidad', 'descripcion', 'precio']
 
-class ServicioDelete(DeleteView):
+class ServicioDelete(LoginRequiredMixin, DeleteView):
     model = Servicio
     success_url = "/AppOdonto/servicio/list"
-
-
 
 
 # CRUD PACIENTE 
     
-""" class PacienteLista(ListView):
+class PacienteList(LoginRequiredMixin, ListView):
     model = Paciente 
-    template_name = "AppOdonto/pacientes/paciente_list.html"
     
-class PacienteDetalle(DetailView):
+class PacienteDetail(LoginRequiredMixin, DetailView):
     model = Paciente
-    template_name = "AppOdonto/pacientes/paciente_detail.html"
     
-class PacienteCrear(LoginRequiredMixin, CreateView):
+class PacienteCreate(LoginRequiredMixin, CreateView):
     model = Paciente
     fields = ["nombre", "apellido", "edad", "celular", "email"]
-    success_url = "/AppOdonto/pacientes/paciente/list"
+    success_url = "/AppOdonto/paciente/list"
     
-class PacienteModificar(LoginRequiredMixin, UpdateView):
+class PacienteUpdate(LoginRequiredMixin, UpdateView):
     model = Paciente
     fields = ["nombre", "apellido", "edad", "celular", "email"]
-    success_url = "/AppOdonto/pacientes/paciente/list"
+    success_url = "/AppOdonto/paciente/list"
     
-class PacienteEliminar(LoginRequiredMixin, DeleteView):
+class PacienteDelete(LoginRequiredMixin, DeleteView):
     model = Paciente
-    success_url = "/AppOdonto/pacientes/paciente/list" """
+    success_url = "/AppOdonto/paciente/list"
 
 
 # CRUD TURNO
 
-""" class TurnoCrear(LoginRequiredMixin, CreateView):
+class TurnoList(LoginRequiredMixin, ListView):
     model = Turno
-    fields = ["servicio", "profesional", "fecha", "horario"]
-    success_url = "/AppOdonto/inicio.html"   
-
-class TurnoVer(LoginRequiredMixin, ListView):
+    
+class TurnoDetail(LoginRequiredMixin, DetailView):
     model = Turno
 
-class TurnoModificar(LoginRequiredMixin, UpdateView):
+class TurnoCreate(LoginRequiredMixin, CreateView):
     model = Turno
-    fields = ["servicio", "profesional", "fecha", "horario"]
-    success_url = "/AppOdonto/inicio.html"    
+    fields = ["paciente", "servicio", "profesional", "fecha", "horario"]
+    success_url = "/AppOdonto/turno/list"   
 
-class TurnoEliminar(LoginRequiredMixin, DeleteView):
+class TurnoUpdate(LoginRequiredMixin, UpdateView):
     model = Turno
-    success_url = "/AppOdonto/inicio.html"  """
+    fields = ["paciente", "servicio", "profesional", "fecha", "horario"]
+    success_url = "/AppOdonto/turno/list"   
+
+class TurnoDelete(LoginRequiredMixin, DeleteView):
+    model = Turno
+    success_url = "/AppOdonto/turno/list"
     
 
 # REGISTRO - LOGIN - LOGOUT
-
 
 def registro(request):
     if request.method == "POST":
         miFormulario = RegistroFormulario(request.POST)
         if miFormulario.is_valid():
+            #username = miFormulario.cleaned_data['username']
             miFormulario.save()
             return render(request, "AppOdonto/inicio.html", {'mensaje':"Usuario registrado"})
     else:
         miFormulario = RegistroFormulario()
     return render(request, "AppOdonto/autenticacion/registro.html", {"formulario1":miFormulario})
 
-def iniciar_sesion(request): 
+def login_request(request): 
     if request.method == "POST":
-        miFormulario = AuthenticationForm(request, data = request.POST) 
-        if miFormulario.is_valid():
-            usuario = miFormulario.cleaned_data.get("username") 
-            contra = miFormulario.cleaned_data.get("password")
-            miUsuario = authenticate(username=usuario, password=contra) 
-            if miUsuario:
-                login(request,miUsuario)          
-                mensaje = f"Bienvenido {miUsuario}"
+        form = AuthenticationForm(request, data = request.POST) 
+        if form.is_valid():
+            usuario = form.cleaned_data.get("username") 
+            contra = form.cleaned_data.get("password")
+            user = authenticate(username=usuario, password=contra) 
+            if user is not None:
+                login(request, user)          
+                mensaje = f"Bienvenido {usuario}"
                 return render(request, "AppOdonto/inicio.html", {"mensaje":mensaje})
             else:
                 mensaje = f"Datos ingresados incorrectos."
                 return render(request, "AppOdonto/inicio.html", {"mensaje":mensaje})
     else:
-        miFormulario = AuthenticationForm()
-    return render(request, "AppOdonto/autenticacion/login.html", {"formulario1":miFormulario})   
+        form = AuthenticationForm()
+    return render(request, "AppOdonto/autenticacion/login.html", {"form":form})   
   
 def about(request):
     return render(request, "AppOdonto/about.html")

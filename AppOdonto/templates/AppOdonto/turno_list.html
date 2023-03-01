@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1>Turnos</h1>
+    <ul>
+        {% for turno in object_list %} 
+            <li>
+                <p>
+                    Paciente: {{turno.paciente}}
+                </p>
+                <p>
+                    <a href="{% url 'Turno Detail' turno.id %}">Ver Turno</a>
+                    <a href="{% url 'Turno Edit' turno.id %}">Editar Turno</a>
+                    <a href="{% url 'Turno Delete' turno.id %}">Borrar Turno</a>
+                </p>
+            </li>
+        {% endfor %}
+    </ul>
+    <br>
+    <button>
+        <a href="{% url 'Turno Create' %}">Crear Turno</a>
+    </button>
+
+</body>
+</html>

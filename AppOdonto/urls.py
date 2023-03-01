@@ -19,37 +19,26 @@ urlpatterns = [
     path('servicio/editar/<int:pk>', ServicioUpdate.as_view(), name="Servicio Edit"),
     path('servicio/borrar/<int:pk>', ServicioDelete.as_view(), name="Servicio Delete"),
     
+    # CRUD PACIENTES (con clases)
+    path('paciente/list/', PacienteList.as_view(), name="Paciente List"),
+    path('paciente/<int:pk>', PacienteDetail.as_view(), name="Paciente Detail"),   
+    path('paciente/crear/', PacienteCreate.as_view(), name="Paciente Create"),
+    path('paciente/modificar/<int:pk>', PacienteUpdate.as_view(), name="Paciente Edit"),
+    path('paciente/eliminar/<int:pk>', PacienteDelete.as_view(), name="Paciente Delete"),
+    
+    # CRUD TURNOS (con clases)
+    path('turno/list/', TurnoList.as_view(), name="Turno List"),
+    path('turno/<int:pk>', TurnoDetail.as_view(), name="Turno Detail"),
+    path('turno/crear/', TurnoCreate.as_view(), name="Turno Create"),
+    path('turno/modificar/<int:pk>', TurnoUpdate.as_view(), name="Turno Edit"),
+    path('turno/eliminar/<int:pk>', TurnoDelete.as_view(), name="Turno Delete"), 
     
     
-    
-    
-    
-    
-
-    #Autenticacion de usuario
-    path("registro/", registro, name="Registro"),
-    path("login/", iniciar_sesion, name="Login"),
+    # AUTENTICACION USUARIO
+    path("registro/", views.registro, name="Registro"),
+    path("login/", views.login_request, name="Login"),
     path("logout/", LogoutView.as_view(template_name="AppOdonto/autenticacion/logout.html"),name="Logout"),
     path("about/", about, name="About"),  
        
-       
     
 ]
-
-      
-    #path("profesionales/nuevo", ProfesionalCrear.as_view(), name="Crear Profesional"),
-    #path("profesionales/ver", ProfesionalVer.as_view(), name="Ver Profesional"),
-    #path("profesionales/modificar/<int:pk>", ProfesionalModificar.as_view(), name="Modificar Profesional"),
-    #path("profesionales/eliminar/<int:pk>", ProfesionalEliminar.as_view(), name="Eliminar Profesional"),
- 
- 
-"""     path("pacientes/paciente/list/", views.PacienteLista.as_view(), name="Lista Paciente"),
-    path("pacientes/paciente/detail/", views.PacienteDetalle.as_view(), name="Detalle Paciente"),   
-    path("paciente/nuevo/", views.PacienteCrear.as_view(), name="Crear Paciente"),
-    path("paciente/modificar/<int:pk>", views.PacienteModificar.as_view(), name="Modificar Paciente"),
-    path("paciente/eliminar/<int:pk>", views.PacienteEliminar.as_view(), name="Eliminar Paciente"),
-    
-   path("turnos/nuevo/", TurnoCrear.as_view(), name="Crear Turno"),
-    path("turnos/ver/", TurnoVer.as_view(), name="Ver Turno"),
-    path("turnos/modificar/<int:pk>", TurnoModificar.as_view(), name="Modificar Turno"),
-    path("turnos/eliminar/<int:pk>", TurnoEliminar.as_view(), name="Eliminar Turno"),  """
