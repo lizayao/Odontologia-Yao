@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends "AppOdonto/padre.html" %}
+
+{% block header %} 
+    <h1 class="display-5 fw-bolder text-white mb-2">Profesionales</h1>
+{% endblock %} 
+
+{% block features %}
+
     {% for p in profesionales %} 
 
         <li>{{p}}</li>
@@ -18,5 +17,11 @@
     {% endfor %}
 
     <a href="{% url 'Agregar Profesional' %}">Agregar Profesional</a>
-</body>
-</html>
+
+{% endblock %}
+
+{% block testimonials %} 
+{% endblock %}
+
+{% block formulario %} 
+{% endblock %}
