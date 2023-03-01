@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+#from django.http import HttpResponse
 from AppOdonto.models import *
 from AppOdonto.forms import *
 from django.views.generic import ListView
@@ -165,6 +165,24 @@ def login_request(request):
     else:
         form = AuthenticationForm()
     return render(request, "AppOdonto/autenticacion/login.html", {"form":form})   
+
+@login_required
+def editarPerfil(request):
+    usuario = request.user
+    if request.method == 'POST':
+        miFormulario = UserEditForm(request.POST)
+        if miFormulario.is_valid():
+            informacion = miFormulario.cleaned_data
+            usuario.email = informacion['email']
+            usuario.password1 = informacion['password1']
+            usuario.password2 = informacion['password2']
+            usuario.save()
+            return render(request, "AppOdonto/inicio.html")
+    else:
+        miFormulario = UserEditForm(initial={'email':usuario.email})
+    return render(request, "AppOdonto/editarPerfil.html",{"miFormulario":miFormulario, "usuario":usuario})
+
+
   
 def about(request):
     return render(request, "AppOdonto/about.html")

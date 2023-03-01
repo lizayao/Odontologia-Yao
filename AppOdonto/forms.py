@@ -33,11 +33,21 @@ class TurnoFormulario(forms.Form):
 
 
 class RegistroFormulario(UserCreationForm):
+    username = forms.CharField(label="Usuario")
     first_name = forms.CharField(label="Nombre") 
     last_name = forms.CharField(label="Apellido")
-    password1 = forms.CharField(label="Ingrese su contraseña:", widget=forms.PasswordInput)
+    password1 = forms.CharField(label="Contraseña:", widget=forms.PasswordInput)
     password2 = forms.CharField(label="Reingrese la contraseña:", widget=forms.PasswordInput)
     class Meta: 
         model = User
         fields = ["username", "first_name", "last_name", "password1", "password2"]    
         help_texts = {k:"" for k in fields} #saca mensajes de ayuda
+        
+class UserEditForm(UserCreationForm):
+    email = forms.EmailField(label="Modificar Email")
+    password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
+    password2 = forms.CharField(label="Repetir la contraseña", widget=forms.PasswordInput)
+    class Meta:
+        model = User
+        fields = ['email', 'password1', 'password2']
+        help_texts = {k:"" for k in fields}

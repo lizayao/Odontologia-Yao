@@ -38,6 +38,9 @@ urlpatterns = [
     path("registro/", views.registro, name="Registro"),
     path("login/", views.login_request, name="Login"),
     path("logout/", LogoutView.as_view(template_name="AppOdonto/autenticacion/logout.html"),name="Logout"),
+    path("editarPerfil/", views.editarPerfil, name="Editar Perfil"),
+    
+    
     path("about/", about, name="About"),  
        
     
