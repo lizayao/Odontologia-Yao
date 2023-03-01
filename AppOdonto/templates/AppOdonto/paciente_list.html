@@ -1,13 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
+{% extends "AppOdonto/padre.html" %}
+ 
+{% block features %}
+{% endblock %}
+
+{% block testimonials %}
+{% endblock %}    
+
+{% block formulario %} 
+
     <h1>Pacientes</h1>
     <ul>
         {% for paciente in object_list %} 
@@ -28,5 +28,4 @@
         <a href="{% url 'Paciente Create' %}">Crear Paciente</a>
     </button>
 
-</body>
-</html>
+{% endblock %}
