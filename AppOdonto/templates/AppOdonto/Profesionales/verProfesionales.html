@@ -20,6 +20,8 @@
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
             <th scope="col">Especialidad</th>
+            <th scope="col">Celular</th>
+            <th scope="col">Email</th>
             <th scope="col">Editar</th>
             <th scope="col">Borrar</th>
         </tr>
@@ -31,23 +33,20 @@
                 <td>{{p.nombre}}</td>
                 <td>{{p.apellido}}</td>
                 <td>{{p.especialidad}}</td>
+                <td>{{p.celular}}</td>
+                <td>{{p.email}}</td>
+                <td><a href="{% url 'Editar Profesional' p.nombre %}" class="btn btn-outline-warning"><i class="bi bi-pencil-square"></i></a></td>
+                <td><a href="{% url 'Borrar Profesional' p.nombre %}" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></a></td>
             </tr>
         {% endfor %}
 
         </tbody>
     </table>
 
-
-    {% for p in profesionales %} 
-        <li>{{p}}</li>
-            <a href="{% url 'Editar Profesional' p.nombre %}" class="btn btn-outline-warning">Editar</a>
-            <a href="{% url 'Borrar Profesional' p.nombre %}" class="btn btn-outline-danger">Borrar</a>
-    {% endfor %}
     <br>
-    <br>
-        <a href="{% url 'Agregar Profesional' %}" class="btn btn-outline-success">Agregar Profesional</a>
-        <p> <br>
-        <a href="{% url 'Inicio' %}" class="btn btn-primary">Volver</a>
+        <p class="text-center"><a href="{% url 'Agregar Profesional' %}" class="btn btn-outline-success">Agregar Profesional</a></p>
+        <p>
+        <p class="text-center"><a href="{% url 'Inicio' %}" class="btn btn-outline-primary">Volver</a></p>
         </p>
 
 {% endblock %}
