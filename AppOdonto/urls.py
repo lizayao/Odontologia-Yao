@@ -41,6 +41,10 @@ urlpatterns = [
     path("editarPerfil/", views.editarPerfil, name="Editar Perfil"),
     
     
+    # AVATAR
+    path("agregarAvatar", views.agregarAvatar, name="AgregarAvatar"),
+    
+    
     path("about/", about, name="About"),  
        
     

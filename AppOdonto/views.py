@@ -14,7 +14,8 @@ from django.contrib.auth.decorators import login_required
 # INICIO
 
 def inicio(request):
-    return render(request, "AppOdonto/inicio.html")
+    avatares = AvatarImagen.objects.filter(user=request.user.id)
+    return render(request, "AppOdonto/inicio.html", {"url":avatares[0].imagen.url})
 
 
 # CRUD PROFESIONAL
@@ -135,7 +136,7 @@ class TurnoDelete(LoginRequiredMixin, DeleteView):
     success_url = "/AppOdonto/turno/list"
     
 
-# REGISTRO - LOGIN - LOGOUT
+# REGISTRO - LOGIN
 
 def registro(request):
     if request.method == "POST":
@@ -183,6 +184,23 @@ def editarPerfil(request):
     return render(request, "AppOdonto/editarPerfil.html",{"miFormulario":miFormulario, "usuario":usuario})
 
 
-  
+# CRUD IMAGEN
+
+@login_required
+def agregarAvatar(request):
+    if request.method == 'POST':
+        miFormulario = AvatarFormulario(request.POST, request.FILES)
+        if miFormulario.is_valid():
+            u = User.objects.get(username=request.user)
+            avatar = Avatar (user=u, imagen=miFormulario.cleaned_data['imagen'])
+            avatar.save()
+            return render(request, "AppOdonto/inicio.html")
+    else:
+        miFormulario = AvatarFormulario()
+    return render(request, "AppOdonto/agregarAvatar.html",{"miFormulario":miFormulario})
+
+
+# ABOUT
+
 def about(request):
     return render(request, "AppOdonto/about.html")
