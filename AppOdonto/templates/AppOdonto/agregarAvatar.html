@@ -10,9 +10,10 @@
 {% block testimonials %}
 {% endblock %}
 
-{% block formulario %}    
-    <form method="POST" enctype="multipart/form-data"> {% csrf_token %}
-        {{miFormulario.as_p}}
+{% block formulario %} 
+
+    <form action="" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+        {{formulario.as_p}}
         <input type="submit" value="Actualizar">
     </form>
 

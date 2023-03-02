@@ -38,8 +38,8 @@ class Turno(models.Model):
     fecha = models.DateField()
     horario = models.TimeField()
     
-class AvatarImagen(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+class Avatar(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     imagen = models.ImageField(upload_to="avatares", null=True, blank=True)
     def __str__(self):
-        return f"{self.user} - {self.imagen}"
+        return f"{self.usuario} - {self.imagen}"

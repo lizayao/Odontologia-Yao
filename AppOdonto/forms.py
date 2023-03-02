@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from AppOdonto.models import Avatar
 
 class ProfesionalFormulario(forms.Form):
     nombre = forms.CharField()
@@ -52,4 +53,8 @@ class UserEditForm(UserCreationForm):
         fields = ['email', 'password1', 'password2']
         help_texts = {k:"" for k in fields}
         
-class AvatarFormulario()
+
+class AvatarFormulario(forms.ModelForm):
+    class Meta:
+        model = Avatar
+        fields = ["usuario", "imagen"]

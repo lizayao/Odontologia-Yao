@@ -30,11 +30,11 @@
                         <li class="nav-item"><a class="nav-link">
                             {% if request.user.is_authenticated %} 
                                 <p style="color:white"> |  Hola {{user.first_name}}!</p>
-                                <!-- {% with request.user.avatarimagen_set.first as avatar1 %}
-                                    {% if avatar1 %} 
-                                        <img src="{{avatar1.imagen.url}}" alt="Imagen perfil" width="50px">
+                                {% with user.avatar_set.first as miAvatar%}
+                                    {% if miAvatar %} 
+                                        <img src="{{miAvatar.imagen.url}}" alt="Imagen perfil" style="max-width: 60px;">
                                     {% endif %}
-                                {% endwith %} -->
+                                {% endwith %}
                                 <a class="btn btn-outline-light btn-lg px-4" href="{% url 'Logout' %}">Cerrar sesión</a>
                             {% endif %}
                        </a></li>

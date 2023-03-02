@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 # INICIO
 
 def inicio(request):
-    avatares = AvatarImagen.objects.filter(user=request.user.id)
+    avatares = Avatar.objects.filter(user=request.user.id)
     return render(request, "AppOdonto/inicio.html", {"url":avatares[0].imagen.url})
 
 
@@ -189,15 +189,15 @@ def editarPerfil(request):
 @login_required
 def agregarAvatar(request):
     if request.method == 'POST':
-        miFormulario = AvatarFormulario(request.POST, request.FILES)
-        if miFormulario.is_valid():
-            u = User.objects.get(username=request.user)
-            avatar = Avatar (user=u, imagen=miFormulario.cleaned_data['imagen'])
+        form = AvatarFormulario(request.POST, request.FILES)
+        if form.is_valid():
+            usuarioActual = User.objects.get(username=request.user)
+            avatar = Avatar (usuario=usuarioActual, imagen=form.cleaned_data['imagen'])
             avatar.save()
             return render(request, "AppOdonto/inicio.html")
     else:
-        miFormulario = AvatarFormulario()
-    return render(request, "AppOdonto/agregarAvatar.html",{"miFormulario":miFormulario})
+        form = AvatarFormulario()
+    return render(request, "AppOdonto/agregarAvatar.html",{"formulario":form})
 
 
 # ABOUT

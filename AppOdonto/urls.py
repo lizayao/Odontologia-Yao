@@ -33,19 +33,17 @@ urlpatterns = [
     path('turno/modificar/<int:pk>', TurnoUpdate.as_view(), name="Turno Edit"),
     path('turno/eliminar/<int:pk>', TurnoDelete.as_view(), name="Turno Delete"), 
     
-    
     # AUTENTICACION USUARIO
     path("registro/", views.registro, name="Registro"),
     path("login/", views.login_request, name="Login"),
     path("logout/", LogoutView.as_view(template_name="AppOdonto/autenticacion/logout.html"),name="Logout"),
     path("editarPerfil/", views.editarPerfil, name="Editar Perfil"),
     
-    
     # AVATAR
-    path("agregarAvatar", views.agregarAvatar, name="AgregarAvatar"),
-    
+    path("agregarAvatar", views.agregarAvatar, name="Avatar"),
     
     path("about/", about, name="About"),  
        
     
 ]
+
