@@ -1,12 +1,11 @@
 from django.shortcuts import render
-#from django.http import HttpResponse
 from AppOdonto.models import *
 from AppOdonto.forms import *
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
@@ -19,55 +18,28 @@ def inicio(request):
 
 # CRUD PROFESIONAL
 
-profesionales = Profesional.objects.all() #Variable global
+class ProfesionalList(LoginRequiredMixin, ListView):
+    model = Profesional
 
-@login_required
-def verProfesionales(request):
-    return render(request, "AppOdonto/Profesionales/verProfesionales.html", {"profesionales":profesionales})
+class ProfesionalDetail(LoginRequiredMixin, DetailView):
+    model = Profesional
 
-@login_required
-def agregarProfesional(request):
-    if request.method == 'POST':
-        miFormulario = ProfesionalFormulario(request.POST)
-        print(miFormulario)
-        if miFormulario.is_valid():
-            informacion = miFormulario.cleaned_data
-            profesional = Profesional(nombre=informacion['nombre'], apellido=informacion['apellido'], especialidad=informacion['especialidad'], celular=informacion['celular'], email=informacion['email'])
-            profesional.save()
-            return render(request, "AppOdonto/Profesionales/verProfesionales.html",{"profesionales":profesionales})
-    else:
-        miFormulario = ProfesionalFormulario()
-    return render(request, "AppOdonto/Profesionales/agregarProfesional.html", {"miFormulario":miFormulario})
+class ProfesionalCreate(LoginRequiredMixin, CreateView):
+    model = Profesional
+    success_url = "/AppOdonto/profesional/list"
+    fields = ['nombre', 'apellido', 'especialidad', 'celular', 'email']
+    
+class ProfesionalUpdate(LoginRequiredMixin, UpdateView):
+    model = Profesional
+    success_url = "/AppOdonto/profesional/list"
+    fields = ['nombre', 'apellido', 'especialidad', 'celular', 'email']
 
-@login_required
-def borrarProfesional(request, profesional_nombre):
-    profesional = Profesional.objects.get(nombre=profesional_nombre)
-    profesional.delete()
-    profesional = Profesional.objects.all()
-    contexto = {"profesional": profesional}
-    return render(request, "AppOdonto/Profesionales/verProfesionales.html", contexto)
-
-@login_required
-def editarProfesional(request, profesional_nombre):
-    profesional = Profesional.objects.get(nombre=profesional_nombre)
-    if request.method == "POST":
-        miFormulario = ProfesionalFormulario(request.POST)
-        print(miFormulario)
-        if miFormulario.is_valid():
-            informacion = miFormulario.cleaned_data
-            profesional.nombre = informacion['nombre']
-            profesional.apellido = informacion['apellido']
-            profesional.especialidad = informacion['especialidad']
-            profesional.celular = informacion['celular']
-            profesional.email = informacion['email']
-            profesional.save()
-            return render(request, "AppOdonto/Profesionales/verProfesionales.html")
-    else:
-        miFormulario = ProfesionalFormulario(initial={'nombre':profesional.nombre, 'apellido': profesional.apellido, 'especialidad': profesional.especialidad, 'celular': profesional.celular, 'email': profesional.email})
-    return render(request, "AppOdonto/Profesionales/editarProfesional.html", {"miFormulario":miFormulario, "profesional_nombre":profesional_nombre})
+class ProfesionalDelete(LoginRequiredMixin, DeleteView):
+    model = Profesional
+    success_url = "/AppOdonto/profesional/list"
 
 
-# CRUD SERVICIOS (vistas basadas en clases)
+# CRUD SERVICIOS
 
 class ServicioList(LoginRequiredMixin, ListView):
     model = Servicio

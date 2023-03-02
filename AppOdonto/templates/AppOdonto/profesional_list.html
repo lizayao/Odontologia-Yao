@@ -1,0 +1,50 @@
+{% extends "AppOdonto/padre.html" %}
+
+{% block header %}
+    <h1 class="display-5 fw-bolder text-white mb-2">Profesionales</h1>
+{% endblock %}
+
+{% block features %}
+{% endblock %}
+
+{% block testimonials %}
+{% endblock %}
+
+{% block formulario %}  
+
+<table class="table m-5">
+    <thead>
+    <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Especialidad</th>
+        <th scope="col">Ver más</th>
+        <th scope="col">Editar</th>
+        <th scope="col">Borrar</th>
+    </tr>
+    </thead>
+    <tbody class="table-group-divider">
+
+    {% for profesional in object_list %}
+        <tr>
+            <td>{{profesional.nombre}}</td>
+            <td>{{profesional.apellido}}</td>
+            <td>{{profesional.especialidad}}</td>
+            <td><a href="{% url 'Profesional Detail' profesional.id %}" class="btn btn-outline-info"><i class="bi bi-eye-fill"></i></a></td>
+            <td><a href="{% url 'Profesional Edit' profesional.id %}" class="btn btn-outline-warning"><i class="bi bi-pencil-square"></i></a></td>
+            <td><a href="{% url 'Profesional Delete' profesional.id %}" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></a></td>
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+
+    <p class="text-center"><a href="{% url 'Profesional Create' %}" class="btn btn-outline-success">Añadir Profesional</a></p>
+    <p>
+    <p class="text-center"><a href="{% url 'Inicio' %}" class="btn btn-outline-primary">Volver</a></p>
+    </p>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

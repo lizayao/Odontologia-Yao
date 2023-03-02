@@ -7,10 +7,11 @@ urlpatterns = [
     path("", views.inicio, name="Inicio"),    
     
     # CRUD PROFESIONALES
-    path('verProfesionales/', views.verProfesionales, name="Ver Profesionales"),
-    path('agregarProfesional/', views.agregarProfesional, name="Agregar Profesional"),
-    path('borrarProfesional/<profesional_nombre>/', views.borrarProfesional, name="Borrar Profesional"),
-    path('editarProfesional/<profesional_nombre>/', views.editarProfesional, name="Editar Profesional"),
+    path('profesional/list/', ProfesionalList.as_view(), name="Profesional List"),
+    path('profesional/<int:pk>', ProfesionalDetail.as_view(), name="Profesional Detail"),
+    path('profesional/crear/', ProfesionalCreate.as_view(), name="Profesional Create"),
+    path('profesional/editar/<int:pk>', ProfesionalUpdate.as_view(), name="Profesional Edit"),
+    path('profesional/borrar/<int:pk>', ProfesionalDelete.as_view(), name="Profesional Delete"),    
     
     # CRUD SERVICIOS (con clases)
     path('servicio/list/', ServicioList.as_view(), name="Servicio List"),
@@ -46,4 +47,3 @@ urlpatterns = [
        
     
 ]
-

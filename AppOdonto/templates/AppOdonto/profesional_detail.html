@@ -1,0 +1,29 @@
+{% extends "AppOdonto/padre.html" %}
+
+{% block header %}
+    <h1 class="display-5 fw-bolder text-white mb-2">Detalle profesional</h1>
+{% endblock %}
+
+{% block features %}
+{% endblock %}
+
+{% block testimonials %}
+{% endblock %}
+
+{% block formulario %}  
+
+<section class="m-5">
+    <p><b>Nombre:</b> <i>{{profesional.nombre}}</i></p>
+    <p><b>Apellido:</b> <i>{{profesional.apellido}}</i></p>
+    <p><b>Especialidad:</b> <i>{{profesional.especialidad}}</i></p>
+    <p><b>Celular:</b> <i>{{profesional.celular}}</i></p>
+    <p><b>Email:</b> <i>{{profesional.email}}</i></p> <br>
+    <p>
+        <a href="{% url 'Profesional List' %}" class="btn btn-primary mx-4">Volver</a>
+    </p>
+</section>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "AppOdonto/padre.html" %}
+
+{% block header %}
+    <h1 class="display-5 fw-bolder text-white mb-2">Agregar profesional</h1>
+{% endblock %}
+
+{% block features %}
+{% endblock %}
+
+{% block testimonials %}
+{% endblock %}
+
+{% block formulario %}  
+
+    <form action="" method="POST" class="m-4"> {% csrf_token %}
+    <table>
+        {{form.as_table}}
+    </table> <br>
+    <input type="submit" class="btn btn-success" value="Guardar">
+    </form> 
+    <p>
+        <a href="{% url 'Profesional List' %}" class="btn btn-primary mx-4">Volver</a>
+    </p>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
