@@ -11,27 +11,39 @@
 {% endblock %}
 
 {% block formulario %}    
-    <ul>
-        {% for turno in object_list %} 
-            <li>
-                <p>
-                    Paciente: {{turno.paciente}}
-                </p>
-                <p>
-                    <a href="{% url 'Turno Detail' turno.id %}">Ver Turno</a>
-                    <a href="{% url 'Turno Edit' turno.id %}">Editar Turno</a>
-                    <a href="{% url 'Turno Delete' turno.id %}">Borrar Turno</a>
-                </p>
-            </li>
-        {% endfor %}
-    </ul>
-    <br>
-    <button>
-        <a href="{% url 'Turno Create' %}">Crear Turno</a>
-    </button>
+
+<table class="table m-5">
+    <thead>
+    <tr>
+        <th scope="col">Paciente</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Horario</th>
+        <th scope="col">Ver más</th>
+        <th scope="col">Editar</th>
+        <th scope="col">Borrar</th>
+    </tr>
+    </thead>
+    <tbody class="table-group-divider">
+
+    {% for turno in object_list %}
+        <tr>
+            <td>{{turno.paciente}}</td>
+            <td>{{turno.fecha}}</td>
+            <td>{{turno.horario}}</td>
+            <td><a href="{% url 'Turno Detail' turno.id %}" class="btn btn-outline-info"><i class="bi bi-eye-fill"></i></a></td>
+            <td><a href="{% url 'Turno Edit' turno.id %}" class="btn btn-outline-warning"><i class="bi bi-pencil-square"></i></a></td>
+            <td><a href="{% url 'Turno Delete' turno.id %}" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></a></td>
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+
+    <p class="text-center"><a href="{% url 'Turno Create' %}" class="btn btn-outline-success">Agendar Turno</a></p>
     <p>
-        <a href="{% url 'Inicio' %}">Volver</a>
+    <p class="text-center"><a href="{% url 'Inicio' %}" class="btn btn-outline-primary">Volver</a></p>
     </p>
+
 {% endblock %}
 
 {% block footer %}

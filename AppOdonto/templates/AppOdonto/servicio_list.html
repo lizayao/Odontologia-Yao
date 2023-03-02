@@ -12,27 +12,38 @@
 
 {% block formulario %}  
 
-    <ul>
-        {% for servicio in object_list %} 
-            <li>
-                <p>
-                    Nombre: {{servicio.nombre}}
-                </p>
-                <p>
-                    <a href="{% url 'Servicio Detail' servicio.id %}">Ver Servicio</a>
-                    <a href="{% url 'Servicio Edit' servicio.id %}">Editar Servicio</a>
-                    <a href="{% url 'Servicio Delete' servicio.id %}">Borrar Servicio</a>
-                </p>
-            </li>
-        {% endfor %}
-    </ul>
-    <br>
-    <button>
-        <a href="{% url 'Servicio Create' %}">Crear Servicio</a>
-    </button>
+<table class="table m-5">
+    <thead>
+    <tr>
+        <th scope="col">Servicio</th>
+        <th scope="col">Especialidad</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Ver más</th>
+        <th scope="col">Editar</th>
+        <th scope="col">Borrar</th>
+    </tr>
+    </thead>
+    <tbody class="table-group-divider">
+
+    {% for servicio in object_list %}
+        <tr>
+            <td>{{servicio.nombre}}</td>
+            <td>{{servicio.especialidad}}</td>
+            <td>$ {{servicio.precio}}</td>
+            <td><a href="{% url 'Servicio Detail' servicio.id %}" class="btn btn-outline-info"><i class="bi bi-eye-fill"></i></a></td>
+            <td><a href="{% url 'Servicio Edit' servicio.id %}" class="btn btn-outline-warning"><i class="bi bi-pencil-square"></i></a></td>
+            <td><a href="{% url 'Servicio Delete' servicio.id %}" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></a></td>
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+
+    <p class="text-center"><a href="{% url 'Servicio Create' %}" class="btn btn-outline-success">Crear Servicio</a></p>
     <p>
-        <a href="{% url 'Inicio' %}">Volver</a>
+    <p class="text-center"><a href="{% url 'Inicio' %}" class="btn btn-outline-primary">Volver</a></p>
     </p>
+
 {% endblock %}
 
 {% block footer %}

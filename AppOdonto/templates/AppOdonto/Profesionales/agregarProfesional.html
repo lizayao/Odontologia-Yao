@@ -16,14 +16,15 @@
 {% endif %}
 
 {% block formulario %}
-    <form action="" method="POST"> {% csrf_token %}
-        <table>
+
+    <form action="" method="POST" class="m-4"> {% csrf_token %}
+        <table class="">
             {{miFormulario.as_table}}
-        </table>
-        <input type="submit", value="Agregar">
-    </form>
+        </table> <br>
+        <input type="submit" class="btn btn-success" value="Agregar">
+    </form> 
     <p>
-        <a href="{% url 'Ver Profesionales' %}">Volver</a>
+        <a href="{% url 'Ver Profesionales' %}" class="btn btn-primary mx-4">Volver</a>
     </p>
 {% endblock %}
 

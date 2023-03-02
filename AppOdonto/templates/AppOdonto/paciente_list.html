@@ -12,27 +12,36 @@
 
 {% block formulario %} 
 
-    <ul>
-        {% for paciente in object_list %} 
-            <li>
-                <p>
-                    Nombre: {{paciente.nombre}}
-                </p>
-                <p>
-                    <a href="{% url 'Paciente Detail' paciente.id %}">Ver Paciente</a>
-                    <a href="{% url 'Paciente Edit' paciente.id %}">Editar Paciente</a>
-                    <a href="{% url 'Paciente Delete' paciente.id %}">Borrar Paciente</a>
-                </p>
-            </li>
-        {% endfor %}
-    </ul>
-    <br>
-    <button>
-        <a href="{% url 'Paciente Create' %}">Crear Paciente</a>
-    </button>
+<table class="table m-5">
+    <thead>
+    <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Ver más</th>
+        <th scope="col">Editar</th>
+        <th scope="col">Borrar</th>
+    </tr>
+    </thead>
+    <tbody class="table-group-divider">
+
+    {% for paciente in object_list %}
+        <tr>
+            <td>{{paciente.nombre}}</td>
+            <td>{{paciente.apellido}}</td>
+            <td><a href="{% url 'Paciente Detail' paciente.id %}" class="btn btn-outline-info"><i class="bi bi-eye-fill"></i></a></td>
+            <td><a href="{% url 'Paciente Edit' paciente.id %}" class="btn btn-outline-warning"><i class="bi bi-pencil-square"></i></a></td>
+            <td><a href="{% url 'Paciente Delete' paciente.id %}" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></a></td>
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+
+    <p class="text-center"><a href="{% url 'Paciente Create' %}" class="btn btn-outline-success">Agregar Paciente</a></p>
     <p>
-        <a href="{% url 'Inicio' %}">Volver</a>
+    <p class="text-center"><a href="{% url 'Inicio' %}" class="btn btn-outline-primary">Volver</a></p>
     </p>
+
 {% endblock %}
 
 {% block footer %}

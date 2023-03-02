@@ -19,11 +19,11 @@ def inicio(request):
 
 # CRUD PROFESIONAL
 
+profesionales = Profesional.objects.all() #Variable global
+
 @login_required
 def verProfesionales(request):
-    profesionales = Profesional.objects.all()
-    contexto = {"profesionales":profesionales}
-    return render(request, "AppOdonto/Profesionales/verProfesionales.html", contexto)
+    return render(request, "AppOdonto/Profesionales/verProfesionales.html", {"profesionales":profesionales})
 
 @login_required
 def agregarProfesional(request):
@@ -34,7 +34,7 @@ def agregarProfesional(request):
             informacion = miFormulario.cleaned_data
             profesional = Profesional(nombre=informacion['nombre'], apellido=informacion['apellido'], especialidad=informacion['especialidad'], celular=informacion['celular'], email=informacion['email'])
             profesional.save()
-            return render(request, "AppOdonto/Profesionales/verProfesionales.html")
+            return render(request, "AppOdonto/Profesionales/verProfesionales.html",{"profesionales":profesionales})
     else:
         miFormulario = ProfesionalFormulario()
     return render(request, "AppOdonto/Profesionales/agregarProfesional.html", {"miFormulario":miFormulario})
@@ -61,7 +61,7 @@ def editarProfesional(request, profesional_nombre):
             profesional.celular = informacion['celular']
             profesional.email = informacion['email']
             profesional.save()
-            return render(request, "AppOdonto/inicio.html")
+            return render(request, "AppOdonto/Profesionales/verProfesionales.html")
     else:
         miFormulario = ProfesionalFormulario(initial={'nombre':profesional.nombre, 'apellido': profesional.apellido, 'especialidad': profesional.especialidad, 'celular': profesional.celular, 'email': profesional.email})
     return render(request, "AppOdonto/Profesionales/editarProfesional.html", {"miFormulario":miFormulario, "profesional_nombre":profesional_nombre})
