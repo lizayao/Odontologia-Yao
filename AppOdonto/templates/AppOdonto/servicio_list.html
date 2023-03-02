@@ -11,8 +11,7 @@
 {% endblock %}
 
 {% block formulario %}  
-    
-    <h1>Servicios</h1>
+
     <ul>
         {% for servicio in object_list %} 
             <li>
@@ -34,4 +33,7 @@
     <p>
         <a href="{% url 'Inicio' %}">Volver</a>
     </p>
+{% endblock %}
+
+{% block footer %}
 {% endblock %}

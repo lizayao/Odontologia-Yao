@@ -32,17 +32,16 @@ class TurnoFormulario(forms.Form):
     confirmacion = forms.BooleanField()
 
 
-
 class RegistroFormulario(UserCreationForm):
-    username = forms.CharField(label="Usuario")
     first_name = forms.CharField(label="Nombre") 
     last_name = forms.CharField(label="Apellido")
+    username = forms.CharField(label="Usuario")
     password1 = forms.CharField(label="Contraseña:", widget=forms.PasswordInput)
-    password2 = forms.CharField(label="Reingrese la contraseña:", widget=forms.PasswordInput)
+    password2 = forms.CharField(label="Reingresá la contraseña:", widget=forms.PasswordInput)
     class Meta: 
         model = User
-        fields = ["username", "first_name", "last_name", "password1", "password2"]    
-        help_texts = {k:"" for k in fields} #saca mensajes de ayuda
+        fields = ["first_name", "last_name", "username", "password1", "password2"]    
+        #help_texts = {k:"" for k in fields} 
         
 class UserEditForm(UserCreationForm):
     email = forms.EmailField(label="Modificar Email")
