@@ -57,4 +57,4 @@ class UserEditForm(UserCreationForm):
 class AvatarFormulario(forms.ModelForm):
     class Meta:
         model = Avatar
-        fields = ["usuario", "imagen"]
+        fields = ["imagen"]

@@ -14,8 +14,7 @@ from django.contrib.auth.decorators import login_required
 # INICIO
 
 def inicio(request):
-    avatares = Avatar.objects.filter(user=request.user.id)
-    return render(request, "AppOdonto/inicio.html", {"url":avatares[0].imagen.url})
+    return render(request, "AppOdonto/inicio.html")
 
 
 # CRUD PROFESIONAL

@@ -1,5 +1,9 @@
 {% extends "AppOdonto/padre.html" %}
  
+{% block header %}
+    <h1 class="display-5 fw-bolder text-white mb-2">Pacientes</h1>
+{% endblock %}
+
 {% block features %}
 {% endblock %}
 
@@ -8,7 +12,6 @@
 
 {% block formulario %} 
 
-    <h1>Pacientes</h1>
     <ul>
         {% for paciente in object_list %} 
             <li>
