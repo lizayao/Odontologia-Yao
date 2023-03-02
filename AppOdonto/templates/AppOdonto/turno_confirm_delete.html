@@ -13,11 +13,12 @@
 {% block formulario %}  
     
     <form action="" method="POST"> {% csrf_token %}
-        <p>¿Seguro que queres borrar el turno?</p>>
-        <input type="submit" value="Sí">
+        <br>
+        <h5 class="text-center">¿Seguro que queres borrar el turno de <b>{{turno.paciente}}?</b></h5> <br>
+        <p class="text-center"><input type="submit" class="btn btn-danger mx-4" value="Borrar"></p>
     </form>
-    <p>
-        <a href="{% url 'Turno List' %}">Volver</a>
+    <p class="text-center">
+        <a href="{% url 'Turno List' %}" class="btn btn-primary mx-4">Volver</a>
     </p>
 {% endblock %}
 

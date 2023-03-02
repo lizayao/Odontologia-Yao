@@ -11,15 +11,17 @@
 {% endblock %}    
 
 {% block formulario %} 
-    
-    <p>Nombre: <i>{{paciente.nombre}}</i></p>
-    <p>Apellido: <i>{{paciente.apellido}}</i></p>
-    <p>Edad: <i>{{paciente.edad}}</i></p>
-    <p>Celular: <i>{{paciente.celular}}</i></p>
-    <p>Email: <i>{{paciente.email}}</i></p>
+ 
+<section class="m-5">
+    <p><b>Nombre:</b> <i>{{paciente.nombre}}</i></p>
+    <p><b>Apellido:</b> <i>{{paciente.apellido}}</i></p>
+    <p><b>Edad:</b> <i>{{paciente.edad}}</i></p>
+    <p><b>Celular:</b> <i>{{paciente.celular}}</i></p>
+    <p><b>Email:</b> <i>{{paciente.email}}</i></p> <br>
     <p>
-        <a href="{% url 'Paciente List' %}">Volver</a>
+        <a href="{% url 'Paciente List' %}" class="btn btn-primary mx-4">Volver</a>
     </p>
+</section>
 
 {% endblock %}
 

@@ -11,14 +11,21 @@
 {% endblock %}
 
 {% block formulario %}  
-    
-    <form action="" method="POST"> {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" value="Enviar">
-    </form>
+
+    {% if miFormulario.errors %}
+        <p style="color:red">Están mal los datos, revisar.</p>
+    {% endif %}
+
+    <form action="" method="POST" class="m-4"> {% csrf_token %}
+    <table>
+        {{form.as_table}}
+    </table> <br>
+    <input type="submit" class="btn btn-success" value="Guardar">
+    </form> 
     <p>
-        <a href="{% url 'Servicio List' %}">Volver</a>
+        <a href="{% url 'Servicio List' %}" class="btn btn-primary mx-4">Volver</a>
     </p>
+
 {% endblock %}
 
 {% block footer %}

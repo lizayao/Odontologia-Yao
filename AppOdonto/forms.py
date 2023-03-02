@@ -11,7 +11,7 @@ class ProfesionalFormulario(forms.Form):
     email = forms.EmailField()
     
 class ServicioFormulario(forms.Form):
-    nombre = forms.CharField()
+    servicio = forms.CharField()
     especialidad = forms.CharField()    
     descripcion = forms.CharField()
     precio = forms.IntegerField()

@@ -12,12 +12,14 @@
 
 {% block formulario %} 
 
-    <form action="" method="POST"> {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" value="Agregar" class="btn btn-success">
+    <form action="" method="POST" class="m-4"> {% csrf_token %}
+    <table>
+        {{form.as_table}}
+    </table> <br>
+        <input type="submit" value="Guardar" class="btn btn-success">
     </form>
     <p>
-        <a href="{% url 'Paciente List' %}">Volver</a>
+        <a href="{% url 'Paciente List' %}" class="btn btn-primary mx-4">Volver</a>
     </p>
 {% endblock %}
 

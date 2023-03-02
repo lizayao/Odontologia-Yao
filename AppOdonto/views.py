@@ -78,12 +78,12 @@ class ServicioDetail(LoginRequiredMixin, DetailView):
 class ServicioCreate(LoginRequiredMixin, CreateView):
     model = Servicio
     success_url = "/AppOdonto/servicio/list"
-    fields = ['nombre', 'especialidad', 'descripcion', 'precio']
+    fields = ['servicio', 'especialidad', 'descripcion', 'precio']
     
 class ServicioUpdate(LoginRequiredMixin, UpdateView):
     model = Servicio
     success_url = "/AppOdonto/servicio/list"
-    fields = ['nombre', 'especialidad', 'descripcion', 'precio']
+    fields = ['servicio', 'especialidad', 'descripcion', 'precio']
 
 class ServicioDelete(LoginRequiredMixin, DeleteView):
     model = Servicio

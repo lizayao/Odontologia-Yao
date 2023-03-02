@@ -11,14 +11,16 @@
 {% endblock %}
 
 {% block formulario %}  
-    
-    <p>Nombre: <i>{{servicio.nombre}}</i></p>
-    <p>Especialidad: <i>{{servicio.especialidad}}</i></p>
-    <p>Descripcion: <i>{{servicio.descripcion}}</i></p>
-    <p>Precio: <i>{{servicio.precio}}</i></p>
+
+<section class="m-5">
+    <p><b>Nombre:</b> <i>{{servicio.servicio}}</i></p>
+    <p><b>Especialidad:</b> <i>{{servicio.especialidad}}</i></p>
+    <p><b>Descripcion:</b> <i>{{servicio.descripcion}}</i></p>
+    <p><b>Precio:</b> <i>{{servicio.precio}}</i></p> <br>
     <p>
-        <a href="{% url 'Servicio List' %}">Volver</a>
+        <a href="{% url 'Servicio List' %}" class="btn btn-primary mx-4">Volver</a>
     </p>
+</section>
 
 {% endblock %}
 

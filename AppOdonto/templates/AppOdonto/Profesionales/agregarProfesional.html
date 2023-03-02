@@ -11,11 +11,13 @@
 {% endblock %}
 
 
-{% if miFormulario.errors %}
-    <p style="color:red">Están mal los datos, revisar.</p>
-{% endif %}
+
 
 {% block formulario %}
+
+    {% if miFormulario.errors %}
+        <p style="color:red">Están mal los datos, revisar.</p>
+    {% endif %}
 
     <form action="" method="POST" class="m-4"> {% csrf_token %}
         <table class="">

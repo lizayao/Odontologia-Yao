@@ -12,14 +12,16 @@
 
 {% block formulario %}  
 
-    <p>Paciente: <i>{{turno.paciente}}</i></p>
-    <p>Servicio: <i>{{turno.servicio}}</i></p>
-    <p>Profesional: <i>{{turno.profesional}}</i></p>
-    <p>Fecha: <i>{{turno.fecha}}</i></p>
-    <p>Horario: <i>{{turno.horario}}</i></p>
+<section class="m-5">
+    <p><b>Paciente:</b> <i>{{turno.paciente}}</i></p>
+    <p><b>Servicio:</b> <i>{{turno.servicio}}</i></p>
+    <p><b>Profesional:</b> <i>{{turno.profesional}}</i></p>
+    <p><b>Fecha:</b> <i>{{turno.fecha}}</i></p>
+    <p><b>Horario:</b> <i>{{turno.horario}}</i></p> <br>
     <p>
-        <a href="{% url 'Turno List' %}">Volver</a>
+        <a href="{% url 'Turno List' %}" class="btn btn-primary mx-4">Volver</a>
     </p>
+</section>
 
 {% endblock %}
 

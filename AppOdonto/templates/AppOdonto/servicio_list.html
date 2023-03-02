@@ -27,7 +27,7 @@
 
     {% for servicio in object_list %}
         <tr>
-            <td>{{servicio.nombre}}</td>
+            <td>{{servicio.servicio}}</td>
             <td>{{servicio.especialidad}}</td>
             <td>$ {{servicio.precio}}</td>
             <td><a href="{% url 'Servicio Detail' servicio.id %}" class="btn btn-outline-info"><i class="bi bi-eye-fill"></i></a></td>
@@ -39,7 +39,7 @@
     </tbody>
 </table>
 
-    <p class="text-center"><a href="{% url 'Servicio Create' %}" class="btn btn-outline-success">Crear Servicio</a></p>
+    <p class="text-center"><a href="{% url 'Servicio Create' %}" class="btn btn-outline-success">Añadir Servicio</a></p>
     <p>
     <p class="text-center"><a href="{% url 'Inicio' %}" class="btn btn-outline-primary">Volver</a></p>
     </p>
