@@ -10,16 +10,18 @@
 {% block testimonials %}
 {% endblock %}  
 
-
 {% block formulario %}
-    <form action="" method="POST"> {% csrf_token %}
+
+    <form action="" method="POST" class="m-4"> {% csrf_token %}
         <table>
             {{form.as_table}}
-        </table>
-        <input type = "submit" value = "Iniciar sesión"> 
+        </table> <br>
+        <input type = "submit" class="btn btn-success" value = "Iniciar sesión"> 
     </form>
+    <p>
+        <a href="{% url 'Inicio' %}" class="btn btn-primary mx-4">Volver</a>
+    </p>
 {% endblock %}
-
 
 {% block footer %}
 {% endblock %}

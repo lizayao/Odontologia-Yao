@@ -11,12 +11,17 @@
 {% endblock %}
 
 {% block formulario %}
-    <form action="" method="POST"> {% csrf_token %}
+
+    <form action="" method="POST" class="m-4"> {% csrf_token %}
         <table>
             {{formulario1.as_table}}
-        </table>
-        <input type = "submit" value = "Crear usuario"> 
+        </table> <br>
+        <input type = "submit" class="btn btn-success" value = "Crear usuario"> 
     </form>
+    <p>
+        <a href="{% url 'Inicio' %}" class="btn btn-primary mx-4">Volver</a>
+    </p>
+
 {% endblock %}
 
 {% block footer %}
