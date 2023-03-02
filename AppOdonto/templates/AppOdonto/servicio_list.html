@@ -1,7 +1,7 @@
 {% extends "AppOdonto/padre.html" %}
 
 {% block header %}
-    <h1 class="display-5 fw-bolder text-white mb-2">Turnos</h1>
+    <h1 class="display-5 fw-bolder text-white mb-2">Servicios</h1>
 {% endblock %}
 
 {% block features %}
@@ -31,5 +31,7 @@
     <button>
         <a href="{% url 'Servicio Create' %}">Crear Servicio</a>
     </button>
-
+    <p>
+        <a href="{% url 'Inicio' %}">Volver</a>
+    </p>
 {% endblock %}

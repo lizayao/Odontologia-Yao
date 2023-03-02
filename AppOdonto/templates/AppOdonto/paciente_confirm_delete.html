@@ -1,14 +1,23 @@
 {% extends "AppOdonto/padre.html" %}
-
-{% load crispy_forms_tags %}
-
+ 
 {% block header %}
-    Eliminar paciente
+    <h1 class="display-5 fw-bolder text-white mb-2">Pacientes</h1>
 {% endblock %}
 
+{% block features %}
+{% endblock %}
+
+{% block testimonials %}
+{% endblock %}    
+
 {% block formulario %} 
+
     <form action="" method="POST"> {% csrf_token %}
         ¿Está seguro de que quiere eliminar al paciente {{object.nombre}} {{object.apellido}}?
         <input type="submit" value="Sí">
     </form>
+
+    <p>
+        <a href="{% url 'Paciente List' %}">Volver</a>
+    </p>
 {% endblock %}

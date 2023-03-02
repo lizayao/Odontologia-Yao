@@ -1,13 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
+{% extends "AppOdonto/padre.html" %}
+
+{% block header %}
+    <h1 class="display-5 fw-bolder text-white mb-2">Detalle turno</h1>
+{% endblock %}
+
+{% block features %}
+{% endblock %}
+
+{% block testimonials %}
+{% endblock %}
+
+{% block formulario %}  
+
     <p>Paciente: <i>{{turno.paciente}}</i></p>
     <p>Servicio: <i>{{turno.servicio}}</i></p>
     <p>Profesional: <i>{{turno.profesional}}</i></p>
@@ -17,5 +21,4 @@
         <a href="{% url 'Turno List' %}">Volver</a>
     </p>
 
-</body>
-</html>
+{% endblock %}
