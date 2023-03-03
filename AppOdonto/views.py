@@ -97,7 +97,7 @@ class TurnoCreate(LoginRequiredMixin, CreateView):
     model = Turno
     fields = ["paciente", "servicio", "profesional", "fecha", "horario"]
     success_url = "/AppOdonto/turno/list"   
-
+    
 class TurnoUpdate(LoginRequiredMixin, UpdateView):
     model = Turno
     fields = ["paciente", "servicio", "profesional", "fecha", "horario"]
