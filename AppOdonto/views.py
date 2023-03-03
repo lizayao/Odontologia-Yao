@@ -146,14 +146,16 @@ def editarPerfil(request):
         miFormulario = UserEditForm(request.POST)
         if miFormulario.is_valid():
             informacion = miFormulario.cleaned_data
+            usuario.first_name = informacion['first_name']
+            usuario.last_name = informacion['last_name']
             usuario.email = informacion['email']
             usuario.password1 = informacion['password1']
             usuario.password2 = informacion['password2']
             usuario.save()
             return render(request, "AppOdonto/inicio.html")
     else:
-        miFormulario = UserEditForm(initial={'email':usuario.email})
-    return render(request, "AppOdonto/editarPerfil.html",{"miFormulario":miFormulario, "usuario":usuario})
+        miFormulario = UserEditForm(initial={'first_name':usuario.first_name, 'last_name':usuario.last_name, 'email':usuario.email})
+    return render(request, "AppOdonto/autenticacion/editarPerfil.html",{"miFormulario":miFormulario, "usuario":usuario})
 
 
 # CRUD IMAGEN

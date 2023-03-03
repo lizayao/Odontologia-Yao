@@ -1,14 +1,26 @@
 {% extends "AppOdonto/padre.html" %}
 
-<h1>Formulario - Editar perfil</h1>
-<h1>De {{usuario}}</h1>
+{% block header %}
+    <h1 class="display-5 fw-bolder text-white mb-2">Editar perfil</h1>
+{% endblock %}
 
-<form action="" method="POST"> {% csrf_token %}
-    <table>
-        {{miFormulario.as_table}}
-    </table>
-    <input type="submit", value="Enviar">
-</form>
+{% block features %} 
+{% endblock %} 
+
+{% block testimonials %}  
+{% endblock %}  
+
+{% block formulario %} 
+    <form action="" method="POST" class="m-4"> {% csrf_token %}
+        <table>
+            {{miFormulario.as_table}}
+        </table> <br>
+        <input type="submit" class="btn btn-success"  value="Guardar">
+    </form>
+    <p>
+        <a href="{% url 'Inicio' %}" class="btn btn-primary mx-4">Volver</a>
+    </p>
+{% endblock %}
 
 {% block footer %}
 {% endblock %}
