@@ -16,11 +16,11 @@
     <body>
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container px-5">
-                <a class="navbar-brand" href="{% url 'Inicio' %}">Odontología Yao</a>
+            <div class="container px-4">
+                <a class="navbar-brand pb-3" href="{% url 'Inicio' %}">Odontología Yao</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav ms-auto my-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'Inicio' %}">Inicio</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'Profesional List' %}">Profesionales</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'Servicio List' %}">Servicios</a></li>                       
@@ -28,17 +28,15 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'Turno List' %}">Turnos</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'About' %}">Acerca de mí</a></li>
                         <li class="nav-item"><a class="nav-link">
-                            {% if request.user.is_authenticated %} 
-                                <p style="color:white"><a href="{% url 'Editar Perfil' %}">Hola {{user.first_name}}!</a></p>
-                                {% with user.avatar_set.first as miAvatar%}
-                                    {% if miAvatar %} 
-                                        <img src="{{miAvatar.imagen.url}}" alt="Imagen perfil" style="max-width: 60px;">
-                                    {% endif %}
-                                {% endwith %}
-                                <a class="btn btn-outline-light btn-lg px-2" href="{% url 'Logout' %}">Cerrar sesión</a>
+                    {% if request.user.is_authenticated %} 
+                        <li class="nav-item"><p style="color:white"><a class="nav-link" href="{% url 'Editar Perfil' %}">Hola {{user.first_name}}!</a></p></li>
+                        {% with user.avatar_set.first as miAvatar%}
+                            {% if miAvatar %} 
+                        <li class="nav-item"><img src="{{miAvatar.imagen.url}}" alt="Imagen perfil" height="30px" class="my-1"></li>
                             {% endif %}
-                       </a></li>
-
+                        {% endwith %}
+                        <li class="nav-item mx-3"><a class="btn btn-outline-light px-2" href="{% url 'Logout' %}">Cerrar sesión</a></li>
+                    {% endif %}
                     </ul>
                 </div>
             </div>

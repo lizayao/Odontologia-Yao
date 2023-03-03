@@ -17,6 +17,7 @@
     <tr>
         <th scope="col">Nombre</th>
         <th scope="col">Apellido</th>
+        <th scope="col">Celular</th>
         <th scope="col">Ver más</th>
         <th scope="col">Editar</th>
         <th scope="col">Borrar</th>
@@ -28,6 +29,7 @@
         <tr>
             <td>{{paciente.nombre}}</td>
             <td>{{paciente.apellido}}</td>
+            <td>{{paciente.celular}}</td>
             <td><a href="{% url 'Paciente Detail' paciente.id %}" class="btn btn-outline-info"><i class="bi bi-eye-fill"></i></a></td>
             <td><a href="{% url 'Paciente Edit' paciente.id %}" class="btn btn-outline-warning"><i class="bi bi-pencil-square"></i></a></td>
             <td><a href="{% url 'Paciente Delete' paciente.id %}" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></a></td>
