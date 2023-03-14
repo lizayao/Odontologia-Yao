@@ -27,8 +27,8 @@ class TurnoFormulario(forms.Form):
     paciente = forms.CharField()
     servicio = forms.CharField()
     profesional = forms.CharField()
-    fecha = forms.DateField()
-    horario = forms.TimeField()
+    fecha = forms.CharField()
+    horario = forms.CharField()
 
 
 class RegistroFormulario(UserCreationForm):

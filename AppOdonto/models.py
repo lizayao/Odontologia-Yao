@@ -35,8 +35,8 @@ class Turno(models.Model):
     paciente = models.CharField(max_length=40) 
     servicio = models.CharField(max_length=25) 
     profesional = models.CharField(max_length=25)
-    fecha = models.DateField()
-    horario = models.TimeField()
+    fecha = models.CharField(max_length=10)
+    horario = models.CharField(max_length=10)
         
 class Avatar(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
